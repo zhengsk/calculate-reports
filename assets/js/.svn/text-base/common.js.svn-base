@@ -1,0 +1,588 @@
+
+// Echart 样式
+var chartDataStyle = {
+    year : {    //
+        normal: {
+            label : {
+                show: true,
+                position: 'right'
+            },
+            color:'#31A0E4'
+        }
+    }
+    ,season : { 
+        normal: {
+            label : {
+                show: true,
+                position: 'right'
+            },
+            color:'#FF7F50'
+        }
+    }
+    ,done : {   // 绿色
+        normal: {
+            label : {
+                show: true,
+                position: 'right'
+            },
+            color:'#4CBE5F'
+        }
+    }
+    ,areaDone : { // 某事业部的样式，因为带有负数
+        normal: {
+            label : {
+                show: true,
+                position: 'right',
+                formatter : function(data) {
+                    if(data.value < 0){
+                        return formatNumber(negativeMinimum(data.value, true)); //恢复负值
+                    }else{
+                        return formatNumber(data.value)
+                    }
+                }
+            },
+            color:'#4CBE5F'
+        }
+    }
+    ,target : { 
+        normal: {
+            label : {
+                show: true,
+                position: 'right'
+            },
+            color:'#4CBE5F'
+        }
+    }
+    ,danger : { 
+        normal: {
+            label : {
+                show: true,
+                position: 'right'
+            },
+            color:'red'
+        }
+    }
+};
+
+
+// 设置进度条
+function setProgressBar (id, templ, datas)  {
+    var wrapper = $('#' + id);
+    var totalNote = wrapper.find(">.totalNote");
+    totalNote.html(simpleTempl(templ, datas)); // 设置说明文字
+
+    var groupLabel = wrapper.find('.group-label'); // 跳转集团季度回款页面
+    if(groupLabel.length){
+        groupLabel.on('touchend', function(){
+            window.location = datas.groupUnitPage;
+        });
+    }
+
+    var progressBar = wrapper.find('.progress-bar');
+    progressBar.css("width", datas.yearDonePercent); // 设置progressBar进度 CSS
+    progressBar.find("span").html(datas.yearDonePercent); // 设置progressBar进度条内文本
+}
+
+/*
+*  渲染echart
+*  canvasId : 画布ID str
+*  datas : 图标数据 obj
+*  itemStyle : 样式 arr
+*  stackArray : 堆叠数据分组 arr (数组：值相同的项堆叠一起) 
+*  opts 各种参数
+ */
+function renderChart(canvasId, datas, itemStyle, stackArray, opts){
+
+    var myChart = echarts.init(document.getElementById(canvasId));
+    var seriesType = datas.series.type; // 柱状分类
+    var seriesDatas = datas.series.datas; // 数据
+
+    if(1){ //series 数据处理
+        var series = [];
+        for(var i = 0, j = seriesType.length; i < j; i++){
+            series.push({
+                "name": seriesType[i],
+                "value": seriesType[i]+"id",
+                "type":"bar",
+                "xAxisIndex" : i==0 ? 0 : 1, // 数据值轴
+                "barGap" : 3,
+                "barCategoryGap": "35%",
+                'stack': (stackArray && stackArray[i]) || "", // 堆叠组
+                "data":seriesDatas[i].reverse(),
+                "itemStyle" : itemStyle[i]
+            })
+        }
+    }
+
+    // 数据轴的最大值
+    var axisMaxValue = Math.floor(getAxisExtremeValue(seriesDatas) + 1);
+    
+    var option = {
+       animation: false,
+       tooltip: {
+           show: false
+       },
+       legend: {
+            x: 'left',
+           data : seriesType
+       },
+       grid : opts && opts.grid || {x:35,y:50,x2:30,y2:40},
+       xAxis : [
+           {
+                splitLine : {
+                    lineStyle: {
+                        color: ['#F2F2F2']
+                    } 
+                },
+                axisLine: {
+                    lineStyle : {
+                        color:"#888"
+                    }
+                },
+                splitNumber: 4,
+                position:"top",
+                type : 'value',
+                // min : 0,
+                max : axisMaxValue,
+                axisLabel: {
+                    textStyle: {color:"#555",fontSize:10}
+                }
+           },{
+                splitLine : {
+                    lineStyle: {
+                        color: ['#F2F2F2']
+                    } 
+                },
+                axisLine: {
+                    lineStyle : {
+                        color:"#888888"
+                    }
+                },
+                splitNumber: 4,
+                position:"bottom",
+                type : 'value',
+                // min : 0,
+                max : axisMaxValue,
+                axisLabel: {
+                    textStyle: {color:"#555",fontSize:10}
+                }
+           }
+       ],
+       yAxis : [
+            {
+                splitLine : {
+                    show:false 
+                },
+                axisLine: {
+                    lineStyle : {
+                        color:"#888"
+                    }
+                },
+                axisTick: {
+                    lineStyle:{
+                        color:'#888888'
+                    }
+                },
+                type : 'category',
+                data : (datas.area).reverse(), // 事业部数组
+                axisLabel: {
+                    clickable: opts && opts.axisLabelClickable || false //标签是否可以点击
+                    ,textStyle: opts && opts.axisLabelClickable && ({color:"#4791D3",fontStyle:"bold"}) || ({color:"#555"})
+                }
+            }
+           
+       ],
+       series : (series).reverse()
+    };
+
+    // 如果存在负数值, 设置min值为0
+    if( getAxisExtremeValue(seriesDatas, "min") < 0){
+        option.xAxis[0].min = option.xAxis[1].min = 0;
+        option.xAxis[0].max = option.xAxis[1].max = getAxisMax(axisMaxValue);
+    }
+
+    // 为echarts对象加载数据 
+    myChart.setOption(option);
+
+    return myChart
+}
+
+/*
+*  (同上一个方法)渲染echart，垂直图表
+ */
+function renderChartVertical(canvasId, datas, itemStyle, stackArray, opts){
+
+    var myChart = echarts.init(document.getElementById(canvasId));
+    var seriesType = datas.series.type; // 柱状分类
+    var seriesDatas = datas.series.datas; // 数据
+
+    if(1){ //series 数据处理
+        var series = [];
+        for(var i = 0, j = seriesType.length; i < j; i++){
+            series.push({
+                "name": seriesType[i],
+                "type":"bar",
+                "yAxisIndex" : 0, // 数据值轴
+                "barGap" : 3,
+                "barCategoryGap": "35%",
+                'stack': (stackArray && stackArray[i]) || "", // 堆叠组
+                "data":seriesDatas[i],
+                "itemStyle" : itemStyle[i] && (itemStyle[i].normal.label.position = "top") && itemStyle[i]
+            })
+        }
+    }
+
+    // 数据轴的最大值
+    var axisMaxValue = Math.floor(getAxisExtremeValue(seriesDatas) + 1);
+
+    var option = {
+        animation: false,
+        title: {
+            text: opts && opts.title || '各季度回款情况',
+            x: 'center',
+            y: 'bottom',
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bolder',
+                color: '#428BCA'
+            }
+        },
+
+       tooltip: {
+           show: false
+       },
+       legend: {
+            x: 'left',
+           data : seriesType
+       },
+       grid : opts && opts.grid || {x:50,y:40,x2:10,y2:60 },
+       yAxis : [
+           {
+                splitLine : {
+                    lineStyle: {
+                        color: ['#F2F2F2']
+                    } 
+                },
+                axisLine: {
+                    lineStyle : {
+                        color:"#888"
+                    }
+                },
+                splitNumber: 4,
+                position:"left",
+                type : 'value',
+                // min : 0,
+                //max : axisMaxValue,
+                axisLabel: {
+                    textStyle: {color:"#555"}
+                }
+           }
+       ],
+       xAxis : [
+            {
+                splitLine : {
+                    show:false 
+                },
+                axisLine: {
+                    lineStyle : {
+                        color:"#888"
+                    }
+                },
+                axisTick: {
+                    lineStyle:{
+                        color:'#888888'
+                    }
+                },
+                type : 'category',
+                data : datas.area, // 事业部数组
+                axisLabel: {
+                    textStyle: {color:"#555"}
+                }
+            }
+           
+       ],
+       series : series
+    };
+
+    // 如果存在负数值, 设置min值为0
+    if( getAxisExtremeValue(seriesDatas, "min") < 0){
+        option.yAxis[0].min = 0;
+    }else{
+        option.yAxis[0].max = axisMaxValue;
+    }
+
+    // 为echarts对象加载数据 
+    myChart.setOption(option);
+}
+
+// 获取数据的极值
+function getAxisExtremeValue (seriesDatas, extreme) {
+    var extreme = extreme || "max";
+    var _temp = [];
+    for(var i = 0, j = seriesDatas.length; i < j; i++){
+        _temp.push( Math[extreme].apply({},seriesDatas[i]) );
+    };
+    console.info(_temp);
+    return Math[extreme].apply({},_temp);
+}
+
+// 获取数据的最大值
+function getAxisMax (max) {
+    var maxStr = max + "",
+        len = maxStr.length,
+        first = parseInt(maxStr.split('')[0]);
+        //if(first % 2 !== 0){ ++first }
+
+    var axisMax = (first + 2) * Math.pow(10,len-1);
+    return axisMax;
+}
+
+// 表格单元值，添加千分符
+function tdFormat(value, row, index){
+    return formatNumber(value, true)
+}
+
+
+// 设置数据的负值为很小的值
+function negativeMinimum(datas, recover){
+    var power = Math.pow(10,100);
+    if(recover){return datas*power;} //恢复原值
+    $.each(datas, function(i, data){
+        var _data = data;
+        $.each(_data, function(i, data){
+            if(data < 0){
+                _data[i] = data/power;
+            }
+        });
+    });
+    return datas;
+}
+
+
+/**
+    * 将数值四舍五入后格式化.
+    * @param num 数值(Number或者String)
+    * @param isThousand 是否需要千分位 (boolean);
+    * @param cent 要保留的小数位(Number)
+    * @return 格式的字符串,如'1,234,567.45'
+    * @type String
+*/
+function formatNumber(num,isThousand,cent) {
+    console.info(num,"---")
+    var num = num.toString().replace(/\$|\,/g,'');
+    var isThousand = isThousand === false ? false : true;
+    var cent = cent || 0;
+    // 检查传入数值为数值类型
+      if(isNaN(num))
+        num = "0";
+
+    // 获取符号(正/负数)
+    sign = (num == (num = Math.abs(num)));
+
+    num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
+    cents = num%Math.pow(10,cent);              // 求出小数位数值
+    num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
+    cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
+
+    // 补足小数位到指定的位数
+    while(cents.length<cent)
+      cents = "0" + cents;
+
+    if(isThousand) {
+      // 对整数部分进行千分位格式化.
+      for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+        num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+    }
+
+    if (cent > 0)
+      return (((sign)?'':'-') + num + '.' + cents);
+    else
+      return (((sign)?'':'-') + num);
+}
+
+
+//模板功能
+function simpleTempl (templ, datas) {
+    var reg;
+    for(var key in datas){
+        if(datas.hasOwnProperty(key)){
+            reg = new RegExp("{{"+ key +"}}", "ig");
+            templ = templ.replace(reg, datas[key]);
+        }
+    }
+    return templ;
+}
+
+
+// 设置下拉列表
+function setAreatSelect(datas, defaultId){
+    var $select = $("#areaSelect"); // 固定Id
+    for(var i = 0, j = datas.length; i < j; i++){
+        if(datas[i].id === defaultId){
+            $select.append("<option value='" + datas[i].id + "' selected='selected'>" + datas[i].name + "</option>");
+        }else{
+            $select.append("<option value='" + datas[i].id + "'>" + datas[i].name + "</option>");
+        }
+    }
+    $select.on('change', function(){
+        window.location.search = "ctrlUnitId=" + encodeURIComponent(this.value);
+    });
+}
+
+// 设置导航 上一个，下一个的按钮 和 方向箭头
+function setNavigator(navi){
+    var btns = [$('#btnPrevious'), $('#btnNext')],
+        arrows = [$('#arrowPrevious'), $('#arrowNext')],
+        navi = [navi.previous, navi.next];
+
+    $.each(btns, function(i, ele){
+        if(navi[i]){
+            //arrows[i].show();
+            ele.on('touchend',function(){
+                window.location.search = "ctrlUnitId=" + encodeURIComponent(navi[i].id);
+            });
+        }else{
+            ele.attr('disabled','disabled');
+        }
+    });
+}
+
+LoadingTip = {
+    show : function (content, autoHide) {
+        var _this = this;
+        if(!this.created){
+            this.created = true;
+            var ele = document.createElement("span");
+            ele.innerText = content ||"加载中...";
+            ele.style.cssText = "position: absolute; color:#FFF; z-index: 10000; border-radius:5px; top:50%; left:50%; margin:-40px 0 0 -40px; width:80px; height:80px; text-align:center; line-height:80px; background-color:rgba(0,0,0,0.8);"
+            document.body.appendChild(ele);
+            this.ele = ele;
+        }else{
+            this.ele.innerText = content ||"加载中...";
+            this.ele.style.display = "block";
+        }
+        if(autoHide){
+            setTimeout(function(){_this.hide()}, autoHide);
+        };
+    },
+    hide : function () {
+        $(this.ele).fadeOut(400);
+    }
+}
+
+// 拖动元素
+function swipeElement(ele){
+
+    var $ele = $('#' + ele);
+    var sxLen = 0;
+    var sx01 = sx02 = sy01 = sy02 = 0;
+    var isSwipe = false;
+
+    var ele = document.getElementById(ele);
+    ele.addEventListener("touchstart", function(e){
+        ele.className = "";
+        sx01 = e.touches[0].pageX;
+        sy01 = e.touches[0].pageY;
+    });
+
+    ele.addEventListener("touchmove", function(e){
+        isSwipe = true;
+        sx02 = e.touches[0].pageX;
+        sy02 = e.touches[0].pageY;
+        if(Math.abs(sx02 - sx01) > 10){
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        ele.style.webkitTransform = "translate(" + (sx02 - sx01) + "px,0)";
+    });
+
+    ele.addEventListener("touchend", function(e){
+        //ele.className = "animate";
+        var sxLen = sx02 - sx01;
+        var syLen = sy02 - sy01;
+        if( Math.abs(sxLen) > 30 && Math.abs(sxLen) > Math.abs(syLen) ){
+            if( sxLen > 0 ){ // 往前移动
+                if($('#btnPrevious').attr("disabled")){
+                    LoadingTip.show("没有了!", 1000);
+
+                    transformBack(ele, sxLen, 0, 200);
+                    return;
+                }
+                $('#btnPrevious').trigger('touchend');
+            }
+            if( sxLen < 0 ){ // 往后移动
+                if($('#btnNext').attr("disabled")){
+                    LoadingTip.show("没有了!", 1000);
+
+                    transformBack(ele, sxLen, 0, 200);
+                    return;
+                }
+                $('#btnNext').trigger('touchend');
+            }
+        }else{
+            isSwipe && transformBack(ele, sxLen, 0, 200);
+        }
+    });
+
+}
+
+// 拖动返回方法
+function transformBack(ele, fromeValue, toValue, times){
+
+    toValue = toValue || 0;
+    times = times || 1000;
+
+    var steps = times/(1000/60);
+    var stepLen = (toValue - fromeValue) / steps;
+
+    var current = fromeValue;
+
+    function goStep(){
+
+        current += stepLen;
+
+        if(Math.abs(current - toValue) > Math.abs(stepLen)){
+            setTimeout(goStep, 1000/60);
+        }else{
+            current = toValue;
+        }
+        ele.style.webkitTransform = "translate(" + current +"px,0)";
+
+    }
+    goStep();
+}
+
+// swipeTip 滑动切换提示功能
+function SwipeTip(ele, sign){
+
+    this.sign = sign; //是否第一次标记
+    this.ele = document.getElementById(ele);
+
+    this.init = function(){
+        if(window.localStorage){
+            if(!localStorage.getItem(this.sign)){ // 不存在，则需要显示滑动提示
+                this.show();
+            }
+        };
+    };
+
+    this.show = function() {
+        var _self = this;
+        localStorage.setItem(this.sign, 1);
+        
+        this.ele.addEventListener("webkitAnimationEnd", function(){
+            _self.destory();
+        }, false);
+        this.ele.addEventListener("animationEnd", function(){
+            _self.destory();
+        }, false);
+
+        $(this.ele).addClass('active').show();
+    };
+
+    this.destory = function(){
+        $(this.ele).fadeOut(function(){600,$(this).remove()});
+    };
+
+    this.init();
+}

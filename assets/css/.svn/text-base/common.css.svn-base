@@ -1,0 +1,257 @@
+﻿body{
+	font-family: "微软雅黑",Helvetica, Arial, sans-serif;
+	position: relative;
+	
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.tab-content{
+	font-size: 12px;
+}
+
+.totalNote{
+	margin-left: 5px;
+	margin-bottom: 5px;
+	display: inline-block;
+	font-size: 12px;
+}
+
+.group-label{
+	float: left;
+	margin-left:4px;
+	font-weight: bold; 
+	line-height: 1.6em;
+}
+
+.group-label:hover{
+	text-decoration: none;
+}
+
+span.group-label{
+	font-weight: normal;
+	color: #555;
+	pointer-events: none; /* 取消点击功能 */
+} 
+
+.unitNote{
+	float: left;
+	color: #555;
+	display: inline-block;
+	height:30px;
+	line-height: 30px;
+}
+
+.container-fluid{
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 8px;
+}
+
+.clickAble tr{
+	cursor:pointer;
+}
+.clickAble tr:last-of-type{
+	cursor:default;
+}
+
+.th-inner{
+	padding:5px!important;
+	line-height: 16px!important;
+}
+
+.clickAble tbody>tr>td:first-child{
+	color:#3071A9;
+	/* text-decoration: underline; */
+}
+
+.table-title{
+	background-color: #428bca;
+	color:white;
+	font-size: 0.9em;
+}
+
+.bootstrap-table .table thead>tr>th{
+	border-bottom-color: #FFF;
+	vertical-align: middle;
+}
+
+.fixed-table-container thead th .th-inner{
+	text-align: center;
+}
+
+.table>tbody>tr>td{
+	vertical-align: middle;
+}
+
+.table>tbody>tr:last-of-type{
+	background-color: #428bca;
+	color:#FFF!important;
+}
+.table>tbody>tr:last-of-type>td{
+	color:#FFF!important;
+}
+
+.tab-pane{
+	padding:10px;
+}
+
+.nav-tabs>li{
+	width:50%;
+}
+
+.nav-tabs>li>a{
+	color: #333;
+	text-align: center;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover{
+	color: #B93536!important;
+	font-weight: bold;
+}
+
+
+
+.priceProgress{
+	background-color: #E5E5E5;
+	border-radius: 0;
+	height: 20px;
+}
+
+.priceProgress .progress-bar{
+	line-height: 20px;
+	color: #333;
+	text-shadow:0 1px 0 rgba(255,255,255,0.5);
+}
+
+.priceProgress .progress-bar{
+	line-height: 20px;
+}
+
+
+.areaSelect{
+	width: 75px;
+	padding:3px 10px;
+	height: 28px;
+	vertical-align: middle;
+	margin-right: 10px;
+	border-color: #428BCA;
+}
+
+.swipeWrapper{
+	position: relative;
+	width: 100%;
+	overflow-x:hidden;
+}
+
+#swipeTable.animate {
+	transition-property: all;
+	-webkit-transition-property: all;
+
+	transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+
+	width: 100%;
+	overflow-x:hidden;
+}
+
+.swipe-arrow{
+	position: absolute;
+	font-size: 24px;
+	color:#999;
+	opacity: 0.25;
+	top:50%;
+	margin-top: -0.2em;
+	display: none;
+}
+
+.swipeWrapperChart .swipe-arrow{
+	top:53%;
+}
+
+.glyphicon-chevron-left.swipe-arrow{
+	left: 0; 
+	-webkit-animation: swipeArrowLeft 2s alternate infinite;
+	animation: swipeArrowLeft 2s alternate infinite;
+}
+.glyphicon-chevron-right.swipe-arrow{
+	right: 0; 
+	-webkit-animation: swipeArrowRight 2s alternate infinite;
+	animation: swipeArrowRight 2s alternate infinite;
+}
+
+@keyframes swipeArrowLeft{
+	frome{left: 0; }
+	to{left: 5px; }
+}
+@-webkit-keyframes swipeArrowLeft{
+	frome{left: 0; }
+	to{left: 5px; }
+}
+
+@keyframes swipeArrowRight{
+	frome{right: 0; }
+	to{right: 5px; }
+}
+@-webkit-keyframes swipeArrowRight{
+	frome{right: 0; }
+	to{right: 5px; }
+}
+
+
+.finger-moving-tip-wrapper{
+	position: absolute;
+	top:0; left:0;
+	right:0; bottom:0;
+	pointer-events: none;
+	overflow: hidden;
+	display: none;
+}
+
+.finger-moving-tip-wrapper.active{
+	display: block;
+}
+
+.finger-moving-tip{
+	position: absolute;
+	top:220px; left:0;
+	right:0; bottom:0;
+	background: transparent url(../images/finger-moving-left.png) center 0 no-repeat;
+	background-size: 55%;
+	opacity: 0.4;
+}
+
+.active .finger-moving-tip{
+	-webkit-animation: swipeTip 2s ease 2;
+	animation: swipeTip 2s ease 2;
+
+	-webkit-animation-fill-mode: backwards;
+	animation-fill-mode: backwards;
+}
+
+@keyframes swipeTip{
+	from{
+		-webkit-transform:translate3d(20%,0,0);
+		transform:translate3d(20%,0,0);
+		opacity: 0.1;
+	}
+	to{
+		-webkit-transform:translate3d(-20%,0,0);
+		transform:translate3d(-20%,0,0);
+		opacity: 0.4;
+	}
+}
+@-webkit-keyframes swipeTip{
+	from{
+		-webkit-transform:translate3d(20%,0,0);
+		transform:translate3d(20%,0,0));
+		opacity: 0.1;
+	}
+	to{
+		-webkit-transform:translate3d(-20%,0,0);
+		transform:translate3d(-20%,0,0);
+		opacity: 0.4;
+	}
+}

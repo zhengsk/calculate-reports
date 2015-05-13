@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+
+		<title>年度签约情况 项目</title>
+
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
+
+		<link rel="stylesheet" href="assets/css/common.css">
+
+		<!-- <script src="assets/js/jquery.min.js"></script> -->
+		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap-table/bootstrap-table.js"></script>
+		<script src="assets/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+		<script src="assets/js/common.js"></script>
+		
+	</head>
+	<body>
+		<div class="container-fluid">
+
+			<ul class="nav nav-tabs nav-justified">
+				<li role="presentation" class="active"><a href="yearSign_area.html">年度签约情况</a></li>
+				<li role="presentation"><a href="yearReceive_area.html">年度到款情况</a></li>
+			</ul>
+
+			<div>
+				<div id="buildingName" class="btn btn-primary btn-block active page-header">年度签约情况</div>
+				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
+					<thead></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			
+			<button id="historyBack" class="btn btn-primary btn-block bottom-back-btn">返回</button>
+
+		</div>
+	
+		<script src="assets/js/yearSignReceive.js"></script>
+
+		<script>
+
+			// 请求的URL地址
+			var URL_LIST = {
+				yearSign_area_list: '_temp/yearSign_project_list.html' //项目下来列表
+				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/7.	WXSR_GetYearSignProject' //项目下来列表
+			}
+
+			var TABLE_COLUMNS =[{
+			        field: 'projectName',
+			        title: '项目',
+			        halign: 'center'
+			    }, {
+			        field: 'yearSignBudget',
+			        title: '年度签约<br/>预算',
+			        halign: 'center'
+			    }, {
+			        field: 'yearSignDone',
+			        title: '实际签约<br/>金额',
+			        halign: 'center'
+			    }, {
+			        field: 'completePercent',
+			        title: '预算完成<br/>比例',
+			        halign: 'center'
+			    }];
+
+			$(function() {
+				//设置项目下来列表
+				loadTableList(URL_LIST.yearSign_area_list);
+			});
+
+		</script>
+		
+	</body>
+</html>

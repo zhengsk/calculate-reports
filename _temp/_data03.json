@@ -1,0 +1,21 @@
+[{
+    "id": "第一季度",
+    "predictPrice": "20,000",
+    "alreadyPrice": "18,000"
+},{
+    "id": "第二季度",
+    "predictPrice": "20,000",
+    "alreadyPrice": "25,000"
+},{
+    "id": "第三季度",
+    "predictPrice": "",
+    "alreadyPrice": ""
+},{
+    "id": "第四季度",
+    "predictPrice": "",
+    "alreadyPrice": ""
+},{
+    "id": "合计",
+    "predictPrice": "40,000",
+    "alreadyPrice": "43,000"
+}]

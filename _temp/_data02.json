@@ -1,0 +1,61 @@
+[{
+    "id": "厦门",
+    "predictPrice": "700,000",
+    "seasonPrice" : "200,000",
+    "alreadyPrice": "210,000"
+},{
+    "id": "福州",
+    "predictPrice": "250,000",
+    "seasonPrice" : "80,000",
+    "alreadyPrice": "70,000"
+},{
+    "id": "漳州",
+    "predictPrice": "100,000",
+    "seasonPrice" : "20,000",
+    "alreadyPrice": "10,000"
+},{
+    "id": "泉州",
+    "predictPrice": "50,000",
+    "seasonPrice" : "10,000",
+    "alreadyPrice": "11,000"
+},{
+    "id": "龙岩",
+    "predictPrice": "50,000",
+    "seasonPrice" : "15,000",
+    "alreadyPrice": "20,000"
+},{
+    "id": "三明",
+    "predictPrice": "50,000",
+    "seasonPrice" : "15,000",
+    "alreadyPrice": "16,000"
+},{
+    "id": "南平",
+    "predictPrice": "50,000",
+    "seasonPrice" : "14,000",
+    "alreadyPrice": "16,000"
+}, {
+    "id": "成都",
+    "predictPrice": "250,000",
+    "seasonPrice" : "50,000",
+    "alreadyPrice": "60,000"
+},{
+    "id": "上海",
+    "predictPrice": "400,000",
+    "seasonPrice" : "100,000",
+    "alreadyPrice": "190,000"
+},{
+    "id": "苏州",
+    "predictPrice": "40,000",
+    "seasonPrice" : "10,000",
+    "alreadyPrice": "9,000"
+},{
+    "id": "长沙",
+    "predictPrice": "40,000",
+    "seasonPrice" : "10,000",
+    "alreadyPrice": "12,000"
+},{
+    "id": "合计",
+    "predictPrice": "1,800,000",
+    "seasonPrice" : "500,000",
+    "alreadyPrice": "470,000"
+}]
