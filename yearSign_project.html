@@ -72,7 +72,10 @@
 
 			$(function() {
 				//设置项目下来列表
-				loadTableList(URL_LIST.yearSign_area_list);
+				loadTableList(URL_LIST.yearSign_area_list, {AreaId : queryParamsToObj().areaId});
+
+				//返回
+				historyGo('#historyBack');
 			});
 
 		</script>

@@ -9,13 +9,16 @@ var DEFAULT_VALUE = {
 var footerData = undefined;
 
 // 加载表格数据
-function loadTableList(url) {
+function loadTableList(url, datas) {
+	
+	datas = $.extend({
+		UserID: '',
+		RptDate: '2015-5-14'
+	}, datas);
+
 	doAjax({
 		url: url
-		,data: {
-			UserID : ''
-			,RptDate : '2015-5-14'
-		}
+		,data: datas
 	}, function(data) {
 
 		footerData = data.pop();
@@ -30,7 +33,7 @@ function loadTableList(url) {
 			showHeader: true
 		}).on('click-row.bs.table', function (e, row, $element) {
 			if(URL_LIST.gotoPageUrl){
-				gotoPage(URL_LIST.gotoPageUrl, {id: row.areaId});
+				gotoPage(URL_LIST.gotoPageUrl, {areaId: row.areaId});
 			}
 	    })
 
