@@ -8,11 +8,12 @@ function doAjax (options, callBack) {
     var defaultOptions = {
         type : "GET"
         ,dataType : "json"
+        ,data: {access_token: 'OIUE-ECNE-CHEO-BIUL'}
     }
 
     callBack = callBack || options.callBack || jQuery.noop();
 
-    options = $.extend(defaultOptions, options);
+    options = $.extend(true, defaultOptions, options);
 
     $.support.cors = true;
     

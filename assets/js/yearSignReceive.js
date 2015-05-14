@@ -13,8 +13,7 @@ function loadTableList(url) {
 	doAjax({
 		url: url
 		,data: {
-			access_token: 'OIUE-ECNE-CHEO-BIUL'
-			,UserID : ''
+			UserID : ''
 			,RptDate : '2015-5-14'
 		}
 	}, function(data) {

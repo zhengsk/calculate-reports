@@ -48,8 +48,7 @@ function loadProjectList(url) {
 		url: url
 		//,type: 'POST'
 		,data: {
-			access_token: 'OIUE-ECNE-CHEO-BIUL'
-			,UserID : ''
+			UserID : ''
 		}
 	}, function(data) {
 		data.unshift({
@@ -59,7 +58,7 @@ function loadProjectList(url) {
 		setSelect("projectList", data, "", function(value) {
 			$('#buildingList')[0].length = 1;
 			$('#buildingList').change();
-			value !== 'undefined' && loadBUildingList(URL_LIST.buildingList); // 加载楼栋列表
+			value !== 'undefined' && loadBUildingList(URL_LIST.buildingList, value); // 加载楼栋列表
 		});
 	});
 }
@@ -69,7 +68,7 @@ function loadBUildingList(url, projectId) {
 	doAjax({
 		url: url,
 		data: {
-			projectId: projectId
+			SellProjectID: projectId
 		}
 	}, function(data) {
 		data.unshift({
@@ -89,7 +88,7 @@ function loadUnitsList(url, buildingId) {
 	doAjax({
 		url: url,
 		data: {
-			buildingId: buildingId
+			BuildingID: buildingId
 		}
 	}, function(data) {
 		$('#buildingName').html(data.buildingName);
@@ -114,7 +113,7 @@ function getColumnsAndRows(houseType) {
 	for (var i = 0, j = houseType.length; i < j; i++) {
 		columns.push($.extend({}, DEFAULT_VALUE, {
 			field: "unitName_" + i,
-			title: houseType[i].name + "<br/>" + houseType[i].area,
+			title: houseType[i].name + "<br/>" + houseType[i].area + "㎡",
 			cellFooterStyle: FOOTER_DATA[i] && FOOTER_DATA[i].className || '',	// zsk 扩展
 		}));
 		$.each(houseType[i].units, function(j, ele) {
