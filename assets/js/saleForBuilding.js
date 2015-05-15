@@ -1,4 +1,4 @@
-
+﻿
 
 // 列默认值
 var DEFAULT_VALUE = {
@@ -63,8 +63,7 @@ function loadBUildingList(url, projectId) {
 			value: ''
 		});
 		setSelect("buildingList", data, "", function(value) {
-			$('#unitsListTable').bootstrapTable('destroy');
-			$('#buildingName').html('&nbsp;');
+			showToggleElement(false); // 没数据 隐藏元素
 			value !== 'undefined' && loadUnitsList(URL_LIST.unitsList, value); // 加载户型数据
 		});
 	});
@@ -90,6 +89,8 @@ function loadUnitsList(url, buildingId) {
 			showFooter: false,
 			showHeader: true
 		});
+
+		showToggleElement(true); // 没数据 隐藏元素
 
 		// 展示统计信息
 		setCustomFooter(FOOTER_DATA);
@@ -152,9 +153,20 @@ function setCustomFooter(datas){
 	table.find('tbody').html("<tr>" + tds.join('') + "</tr>");
 }
 
+// 显示整个表格
+function showToggleElement(isShow){
+	if(isShow){
+		fun = 'show'
+	}else{
+		fun = 'hide';
+		$('#unitsListTable').bootstrapTable('destroy');
+	}
+	$('#tableContent')[fun]();
+}
+
 
 // 表格的高度
 function getHeight() {
-	return $(window).height() - 130;
+	return $(window).height() - 170;
 }
 

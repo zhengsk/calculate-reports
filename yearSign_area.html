@@ -25,12 +25,14 @@
 	<body>
 		<div class="container-fluid">
 
-			<ul class="nav nav-tabs nav-justified">
-				<li role="presentation" class="active"><a href="yearSign_area.html">年度签约情况</a></li>
-				<li role="presentation"><a href="yearReceive_area.html">年度到款情况</a></li>
-			</ul>
+			<div class="fixd-tab-nav">
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation" class="active"><a href="yearSign_area.html">年度签约情况</a></li>
+					<li role="presentation"><a href="yearReceive_area.html">年度到款情况</a></li>
+				</ul>
+			</div>
 
-			<div>
+			<div class="table-wrapper">
 				<div id="buildingName" class="btn btn-primary btn-block active page-header">年度签约情况</div>
 
 				<!-- <input type="date" class="form-control date-input" name="projectList" id="projectList"> -->
@@ -41,7 +43,9 @@
 				</table>
 			</div>
 			
-			<button id="historyBack" class="btn btn-primary btn-block bottom-back-btn">返回</button>
+			<div class="bottom-back-btn">
+				<button id="historyBack" class="btn btn-primary btn-block">返回</button>
+			</div>
 
 		</div>
 	

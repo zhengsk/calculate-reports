@@ -25,12 +25,14 @@
 	<body>
 		<div class="container-fluid">
 
-			<ul class="nav nav-tabs nav-justified">
-				<li role="presentation"><a href="yearSign_area.html">年度到款情况</a></li>
-				<li role="presentation" class="active"><a href="yearReceive_area.html">年度到款情况</a></li>
-			</ul>
+			<div class="fixd-tab-nav">
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation"><a href="yearSign_area.html">年度到款情况</a></li>
+					<li role="presentation" class="active"><a href="yearReceive_area.html">年度到款情况</a></li>
+				</ul>
+			</div>
 
-			<div class="">
+			<div class="table-wrapper">
 				<div id="buildingName" class="btn btn-primary btn-block active page-header">年度到款情况</div>
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead></thead>
@@ -38,8 +40,10 @@
 				</table>
 			</div>
 
-			<button id="historyBack" class="btn btn-primary btn-block bottom-back-btn">返回</button>
-			
+			<div class="bottom-back-btn">
+				<button id="historyBack" class="btn btn-primary btn-block">返回</button>
+			</div>
+						
 		</div>
 	
 		<script src="assets/js/yearSignReceive.js"></script>

@@ -65,6 +65,8 @@
 	left: 0;
 	background-color: #fff;
 	z-index: 100;
+	top:0;
+	padding-top: 8px;
 }
 
 .selectWrapper{
@@ -82,11 +84,10 @@
 
 .table-wrapper{
 	padding-top: 45px;
-	padding-left:5px;
-	left:0; right:5px;
+	padding-bottom: 45px;
 	height: 100%;
-	position: fixed;
 	overflow: auto;
+	margin-bottom: -45px;
 }
 
 .unitsListTable{
@@ -101,7 +102,14 @@
 
 /* =E saleForBuilding */
 
-
+.fixd-tab-nav{
+	position: fixed;
+	z-index: 99;
+	box-sizing:border-box;
+	padding: 8px 5px 5px;
+	top:0; left:0;
+	background-color: #fff;
+}
 
 
 
@@ -140,7 +148,12 @@
 
 
 .bottom-back-btn{
-	margin: 5px 0;
+	background-color: #fff;
+	padding:5px;
+	position: fixed;
+	left: 0; bottom: 0;
+	width:100%;
+	box-sizing: border-box;
 }
 
 .date-input{

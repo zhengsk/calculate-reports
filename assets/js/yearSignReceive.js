@@ -75,7 +75,7 @@ function unitClassFormatter(value, row, index, defaultValue) {
 
 // 表格的高度
 function getHeight() {
-	return $(window).height() - 138;
+	return $(window).height() - 142;
 }
 
 
