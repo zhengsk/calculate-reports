@@ -93,6 +93,10 @@
 	/*height: 300px;*/
 }
 
+.custom-table-footer{
+	margin-top: -1px;
+	margin-bottom: 0;
+}
 
 /* =E saleForBuilding */
 

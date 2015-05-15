@@ -1,25 +1,11 @@
 
-// 格式化统计单元格样式
-var footerFormatter = (function(){
-	var i = -1;
-	return function(data) {
-		if(FOOTER_DATA[++i]){
-			return FOOTER_DATA[i].text + "(" + FOOTER_DATA[i].num + ")";
-		}else{
-			i = -1;
-			return '';
-		}
-	}
-})();
 
 // 列默认值
 var DEFAULT_VALUE = {
 	align: "center",
-	formatter: unitTextFormatter,
-	cellStyle: unitClassFormatter,
-	footerFormatter: footerFormatter
+	formatter: unitTextFormatter
+	,cellStyle: unitClassFormatter
 }
-
 
 
 // 统计数据
@@ -46,7 +32,7 @@ var FOOTER_DATA = [
 function loadProjectList(url) {
 	doAjax({
 		url: url
-		//,type: 'POST'
+		// ,type: 'POST'
 		,data: {
 			UserID : ''
 		}
@@ -66,8 +52,9 @@ function loadProjectList(url) {
 //设置楼栋下来列表
 function loadBUildingList(url, projectId) {
 	doAjax({
-		url: url,
-		data: {
+		url: url
+		// ,type: 'POST'
+		,data: {
 			SellProjectID: projectId
 		}
 	}, function(data) {
@@ -86,8 +73,9 @@ function loadBUildingList(url, projectId) {
 // 加载户型列表
 function loadUnitsList(url, buildingId) {
 	doAjax({
-		url: url,
-		data: {
+		url: url
+		// ,type: 'POST'
+		,data: {
 			BuildingID: buildingId
 		}
 	}, function(data) {
@@ -99,9 +87,12 @@ function loadUnitsList(url, buildingId) {
 			headerHeight: 55,
 			columns: columnsAndRows.columns,
 			data: columnsAndRows.rows,
-			showFooter: true,
+			showFooter: false,
 			showHeader: true
 		});
+
+		// 展示统计信息
+		setCustomFooter(FOOTER_DATA);
 
 	});
 }
@@ -113,8 +104,7 @@ function getColumnsAndRows(houseType) {
 	for (var i = 0, j = houseType.length; i < j; i++) {
 		columns.push($.extend({}, DEFAULT_VALUE, {
 			field: "unitName_" + i,
-			title: houseType[i].name + "<br/>" + houseType[i].area + "㎡",
-			cellFooterStyle: FOOTER_DATA[i] && FOOTER_DATA[i].className || '',	// zsk 扩展
+			title: houseType[i].name + "<br/>" + houseType[i].area + "㎡"
 		}));
 		$.each(houseType[i].units, function(j, ele) {
 			if (!rows[j]) {
@@ -152,7 +142,14 @@ function unitClassFormatter(value, row, index, defaultValue) {
 	return {};	// 其他
 }
 
+// 统计信息
+function setCustomFooter(datas){
+
+}
+
+
 // 表格的高度
 function getHeight() {
-	return $(window).height() - 90;
+	return $(window).height() - 130;
 }
+
