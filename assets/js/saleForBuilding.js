@@ -144,7 +144,12 @@ function unitClassFormatter(value, row, index, defaultValue) {
 
 // 统计信息
 function setCustomFooter(datas){
-
+	var table = $('#customTableFooter');
+	var tds = [];
+	for(var i = 0, j = datas.length; i < j; i++){
+		tds.push("<td class='" + datas[i].className + "'>" + datas[i].text + ":" + datas[i].num + "</td>")
+	};
+	table.find('tbody').html("<tr>" + tds.join('') + "</tr>");
 }
 
 
