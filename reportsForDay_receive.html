@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+
+		<title>日签约到款情况——经营分析 日报表</title>
+
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
+
+		<link rel="stylesheet" href="assets/css/common.css">
+
+		<!-- <script src="assets/js/jquery.min.js"></script> -->
+		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap-table/bootstrap-table.js"></script>
+		<script src="assets/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+		<script src="assets/js/common.js"></script>
+		
+	</head>
+	<body>
+		<div class="container-fluid">
+
+			<div class="fixd-tab-nav">
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation"><a href="reportsForDay_sign.html">日新增认购情况</a></li>
+					<li role="presentation" class="active"><a href="reportsForDay_Receive.html">日签约到款情况</a></li>
+				</ul>
+			</div>
+
+			<div class="table-wrapper">
+				<div id="buildingName" class="btn btn-primary btn-block active page-header">日签约到款情况</div>
+				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
+					<thead style="font-size:0.8em;"></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div class="bottom-back-btn">
+				<button id="historyBack" class="btn btn-primary btn-block">返回</button>
+			</div>
+						
+		</div>
+	
+		<script src="assets/js/yearSignReceive.js"></script>
+
+		<script>
+
+			// 请求的URL地址
+			var URL_LIST = {
+				yearSign_area_list: '_temp/reportsForDay_receive_list.html' //项目下来列表
+			}
+
+			var TABLE_COLUMNS =[{
+			        field: 'projectName',
+			        title: '销售项目',
+			        halign: 'center'
+			    }, {
+			        field: 'signNum',
+			        title: '日签约<br/>(万元)',
+			        halign: 'center'
+			    }, {
+			        field: 'receiveNum',
+			        title: '日到款<br/>(万元)',
+			        halign: 'center'
+			    }, {
+			        field: 'unReceiveNum',
+			        title: '未到款<br/>(万元)',
+			        halign: 'center'
+			    }];
+
+			$(function() {
+				//设置项目下来列表
+				loadTableList(URL_LIST.yearSign_area_list);
+			});
+
+		</script>
+		
+	</body>
+</html>

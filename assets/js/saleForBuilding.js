@@ -80,6 +80,10 @@ function loadUnitsList(url, buildingId) {
 	}, function(data) {
 		$('#buildingName').html(data.buildingName);
 		var columnsAndRows = getColumnsAndRows(data.houseType);
+
+		// 清除统计数据值
+		clearFooterData(FOOTER_DATA);
+
 		// 渲染
 		$('#unitsListTable').bootstrapTable({
 			height: getHeight(),
@@ -141,6 +145,13 @@ function unitClassFormatter(value, row, index, defaultValue) {
 
 	defaultValue && ++FOOTER_DATA[2].num;
 	return {};	// 其他
+}
+
+// 清除统计数据值
+function clearFooterData(data){
+	for(var i = 0, j = data.length; i < j;){
+		data[i].num = 0;
+	}
 }
 
 // 统计信息
