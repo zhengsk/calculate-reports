@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>日新增认购情况——经营分析 日报表</title>
+		<title>区域——经营分析 月报表</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
@@ -27,13 +27,13 @@
 
 			<div class="fixd-tab-nav">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation" class="active"><a href="reportsForDay_sign.html">日新增认购情况</a></li>
-					<li role="presentation"><a href="reportsForDay_Receive.html">日签约到款情况</a></li>
+					<li role="presentation" class="active"><a href="reportsForMonth_month.html">月报表</a></li>
+					<li role="presentation"><a href="reportsForDay_Receive.html">销售趋势分析</a></li>
 				</ul>
 			</div>
 
 			<div class="table-wrapper">
-				<div id="buildingName" class="btn btn-primary btn-block active page-header">日新增认购情况</div>
+				<div id="buildingName" class="btn btn-primary btn-block active page-header">3月份报表</div>
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead style="font-size:0.8em;"></thead>
 					<tbody></tbody>
@@ -52,28 +52,26 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				yearSign_area_list: '_temp/reportsForDay_sign_list.html' //项目下来列表
+				yearSign_area_list: '_temp/reportsForMonth_area_list.html' //项目下来列表
+
+				,gotoPageUrl : "reportsForMonth_project.html" // 点击跳转至项目列表
 			}
 
 			var TABLE_COLUMNS =[{
-			        field: 'projectName',
-			        title: '销售项目',
+			        field: 'areaName',
+			        title: '区域',
 			        halign: 'center'
 			    }, {
-			        field: 'house',
-			        title: '住宅<br/>(套)',
+			        field: 'subscrib',
+			        title: '认购<br/>(万元)',
 			        halign: 'center'
 			    }, {
-			        field: 'carport',
-			        title: '车位及<br/>储藏间(个)',
+			        field: 'sign',
+			        title: '签约<br/>(万元)',
 			        halign: 'center'
 			    }, {
-			        field: 'shop',
-			        title: '商铺<br/>(个)',
-			        halign: 'center'
-			    }, {
-			        field: 'signNum',
-			        title: '认购金额<br/>(万元)',
+			        field: 'receive',
+			        title: '到款<br/>(万元)',
 			        halign: 'center'
 			    }];
 
