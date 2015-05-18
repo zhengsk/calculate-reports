@@ -9,7 +9,7 @@ var DEFAULT_VALUE = {
 var footerData = undefined;
 
 // 加载表格数据
-function loadTableList(url, datas) {
+function loadTableList(url, datas, offsetHeight) {
 	
 	datas = $.extend({
 		UserID: '',
@@ -25,7 +25,7 @@ function loadTableList(url, datas) {
 
 		// 渲染
 		$('#unitsListTable').bootstrapTable({
-			height: getHeight(),
+			height: getHeight(offsetHeight),
 			columns: setColumns(TABLE_COLUMNS, DEFAULT_VALUE),
 			data: data,
 			headerHeight: 55, // zsk extend
@@ -74,8 +74,8 @@ function unitClassFormatter(value, row, index, defaultValue) {
 }
 
 // 表格的高度
-function getHeight() {
-	return $(window).height() - 142;
+function getHeight(offsetHeight) {
+	return $(window).height() + (offsetHeight || -142);
 }
 
 
