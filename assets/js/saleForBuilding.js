@@ -133,12 +133,12 @@ function unitTextFormatter(value, row, index) {
 
 // 格式化单元格样式
 function unitClassFormatter(value, row, index, defaultValue) {
-	if (defaultValue && defaultValue[1] == 1) { // 认购
+	if (defaultValue && defaultValue[1] == 0) { // 认购
 		++FOOTER_DATA[0].num;
 		return {classes: FOOTER_DATA[0].className}
 	}
 
-	if (defaultValue && defaultValue[1] == 2) { // 签约
+	if (defaultValue && defaultValue[1] == 1) { // 签约
 		++FOOTER_DATA[1].num;
 		return {classes:  FOOTER_DATA[1].className}
 	}
