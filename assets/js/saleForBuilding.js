@@ -149,7 +149,7 @@ function unitClassFormatter(value, row, index, defaultValue) {
 
 // 清除统计数据值
 function clearFooterData(data){
-	for(var i = 0, j = data.length; i < j;){
+	for(var i = 0, j = data.length; i < j; i++){
 		data[i].num = 0;
 	}
 }
