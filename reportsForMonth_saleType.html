@@ -28,7 +28,7 @@
 			<div class="fixd-tab-nav">
 				<ul class="nav nav-tabs nav-justified">
 					<li role="presentation" class="active"><a href="reportsForMonth_month.html">月报表</a></li>
-					<li role="presentation"><a href="reportsForDay_Receive.html">销售趋势分析</a></li>
+					<li role="presentation"><a href="reportsForMonth_tendence.html">销售趋势分析</a></li>
 				</ul>
 			</div>
 
@@ -41,7 +41,17 @@
 			</div>
 
 			<div class="bottom-back-btn">
-				<button id="historyBack" class="btn btn-primary btn-block">返回</button>
+				<div class="btn-group btn-group-justified">
+				  <div class="btn-group" role="group">
+				    <button id="historyBack" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> 后退</button>
+				  </div>
+				  <div class="btn-group" role="group">
+				    <button id="goToHome" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-home"></i> 首页</button>
+				  </div>
+				  <div class="btn-group" role="group">
+				    <button id="historyForward" type="button" class="btn btn-primary">前进 <i class="glyphicon glyphicon-chevron-right"></i></button>
+				  </div>
+				</div>
 			</div>
 						
 		</div>
@@ -80,8 +90,8 @@
 			$(function() {
 				//设置项目下来列表
 				loadTableList(URL_LIST.yearSign_area_list);								
-				//返回
-				historyGo('#historyBack');
+				//navigator bar 导航
+				initNavigatorBar();
 			});
 
 		</script>

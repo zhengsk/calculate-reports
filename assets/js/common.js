@@ -1,4 +1,4 @@
-/*
+﻿/*
  * 通用的Ajax调用方法
  */
 function doAjax (options, callBack) {
@@ -81,10 +81,27 @@ LoadingTip = {
     }
 }
 
+// 底部导航条
+function initNavigatorBar(){
+    historyGo('#historyBack', -1); // 后退
+    historyGo('#historyForward', 1); // 前进
+    touchEndFun($('#goToHome'), function(){ // 首页
+        window.location.href = 'index.html';
+    });
+}
+
 //历史记录跳转
 function historyGo (ele, num) {
-    $(ele).on('touchend', function(){
+    touchEndFun($(ele), function(){
         window.history.go(num || -1);
+    });
+}
+
+//手触结束事件
+function touchEndFun ($ele, fun) {
+    var param = Array.prototype.slice.call(arguments, 2);
+    $ele.on('touchend', function(){
+        fun.apply(this, param);
     });
 }
 

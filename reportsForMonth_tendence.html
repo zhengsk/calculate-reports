@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8">
@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>楼栋销售概览 </title>
+		<title>销售趋势——经营分析 月报表</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
@@ -25,33 +25,21 @@
 	<body>
 		<div class="container-fluid">
 
-			<div class="selectNav">
-				<div class="selectWrapper">
-					<select  class="form-control" name="projectList" id="projectList">
-						<option value="">--请选择项目--</option>
-					</select>
-				</div>
-				<div class="selectWrapper">
-					<select  class="form-control" name="buildingList" id="buildingList">
-						<option value="">--请选择楼栋--</option>
-					</select>
-				</div>
+			<div class="fixd-tab-nav">
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation"><a href="reportsForMonth_month.html">月报表</a></li>
+					<li role="presentation" class="active"><a href="reportsForMonth_tendence.html">销售趋势分析</a></li>
+				</ul>
 			</div>
 
 			<div class="table-wrapper">
-				<div id="tableContent" style="display: none;">
-					<div id="buildingName" class="btn btn-primary btn-block active" style="margin-top:-5px; margin-bottom:5px;">&nbsp;</div>
-					<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
-						<thead></thead>
-						<tbody></tbody>
-					</table>
-					<table class="table table-bordered custom-table-footer" id="customTableFooter">
-						<tbody>
-						</tbody>
-					</table>
-				</div>
+				<div id="buildingName" class="btn btn-primary btn-block active page-header">全年月报表</div>
+				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
+					<thead style="font-size:0.8em;"></thead>
+					<tbody></tbody>
+				</table>
 			</div>
-			
+
 			<div class="bottom-back-btn">
 				<div class="btn-group btn-group-justified">
 				  <div class="btn-group" role="group">
@@ -65,35 +53,47 @@
 				  </div>
 				</div>
 			</div>
-
+						
 		</div>
+	
+		<script src="assets/js/yearSignReceive.js"></script>
 
-		<script src="assets/js/saleForBuilding.js"></script>
-		
 		<script>
 
 			// 请求的URL地址
 			var URL_LIST = {
-				// projectList: '_temp/project_list.html' //项目下来列表
-				projectList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetAllSellProject' //项目下来列表
+				yearSign_area_list: '_temp/reportsForMonth_month_list.html' //项目下来列表
 
-				//,buildingList: '_temp/building_list.html' //楼栋下来列表
-				,buildingList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetBuilding' //楼栋下来列表
-
-				//,unitsList: '_temp/units_list.html' //户型数据
-				,unitsList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetBuildingSaleInfo' //户型数据
+				,gotoPageUrl : "reportsForMonth_area.html" // 点击跳转至项目列表
 			}
+
+			var TABLE_COLUMNS =[{
+			        field: 'month',
+			        title: '月份',
+			        halign: 'center'
+			    }, {
+			        field: 'subscrib',
+			        title: '认购<br/>(万元)',
+			        halign: 'center'
+			    }, {
+			        field: 'sign',
+			        title: '签约<br/>(万元)',
+			        halign: 'center'
+			    }, {
+			        field: 'receive',
+			        title: '到款<br/>(万元)',
+			        halign: 'center'
+			    }];
 
 			$(function() {
 				//设置项目下来列表
-				loadProjectList(URL_LIST.projectList);
-
+				loadTableList(URL_LIST.yearSign_area_list);
+								
 				//navigator bar 导航
 				initNavigatorBar();
 			});
 
 		</script>
-	
 		
 	</body>
 </html>
