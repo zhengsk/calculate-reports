@@ -13,7 +13,7 @@ function loadTableList(url, datas, offsetHeight) {
 	
 	datas = $.extend({
 		UserID: '',
-		RptDate: '2015-5-14'
+		RptDate: '2015-5-10'
 	}, datas);
 
 	doAjax({
@@ -33,7 +33,20 @@ function loadTableList(url, datas, offsetHeight) {
 			showHeader: true
 		}).on('click-row.bs.table', function (e, row, $element) {
 			if(URL_LIST.gotoPageUrl){
-				gotoPage(URL_LIST.gotoPageUrl, {areaId: row.areaId});
+				var params = {};
+				if(URL_LIST.gotoPageParam){
+					if($.type(URL_LIST.gotoPageParam)  === "object"){
+						URL_LIST.gotoPageParam = [URL_LIST.gotoPageParam];
+					}
+					$.each(URL_LIST.gotoPageParam, function(i, item){
+						if(item.source === 'row'){
+							params[item.name] = row[item.value];
+						}else{
+							params[item.name] = item.value;
+						}
+					});
+				}
+				gotoPage(URL_LIST.gotoPageUrl, params);
 			}
 	    })
 

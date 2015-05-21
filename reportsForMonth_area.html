@@ -62,7 +62,8 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				yearSign_area_list: '_temp/reportsForMonth_area_list.html' //项目下来列表
+				// yearSign_area_list: '_temp/reportsForMonth_area_list.html'
+				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetAreaMonthReport'
 
 				,gotoPageUrl : "reportsForMonth_project.html" // 点击跳转至项目列表
 			}
@@ -87,7 +88,8 @@
 
 			$(function() {
 				//设置项目下来列表
-				loadTableList(URL_LIST.yearSign_area_list);
+				//loadTableList(URL_LIST.yearSign_area_list, {RptMonth : queryParamsToObj().month});
+				loadTableList(URL_LIST.yearSign_area_list, {RptMonth : "201501"});
 				
 				//navigator bar 导航
 				initNavigatorBar();

@@ -62,7 +62,9 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				yearSign_area_list: '_temp/reportsForDay_sign_list.html' //项目下来列表
+				//yearSign_area_list: '_temp/reportsForDay_sign_list.html' //项目下来列表
+				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetDayPurReport' //项目下来列表
+
 			}
 
 			var TABLE_COLUMNS =[{
@@ -82,7 +84,7 @@
 			        title: '商铺<br/>(个)',
 			        halign: 'center'
 			    }, {
-			        field: 'signNum',
+			        field: 'purchaseTotal',
 			        title: '认购金额<br/>(万元)',
 			        halign: 'center'
 			    }];
