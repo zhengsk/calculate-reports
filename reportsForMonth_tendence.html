@@ -9,16 +9,13 @@
 		<title>销售趋势——经营分析 月报表</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
 
 		<link rel="stylesheet" href="assets/css/common.css">
 
-		<!-- <script src="assets/js/jquery.min.js"></script> -->
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		<script src="assets/js/highcharts-custom.js"></script>
 		
 		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-		<script src="assets/bootstrap-table/bootstrap-table.js"></script>
-		<script src="assets/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 		<script src="assets/js/common.js"></script>
 		
 	</head>
@@ -33,11 +30,9 @@
 			</div>
 
 			<div class="table-wrapper">
-				<div id="buildingName" class="btn btn-primary btn-block active page-header">全年月报表</div>
-				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
-					<thead style="font-size:0.8em;"></thead>
-					<tbody></tbody>
-				</table>
+				<div id="canvas">
+					
+				</div>
 			</div>
 
 			<div class="bottom-back-btn">
@@ -56,42 +51,60 @@
 						
 		</div>
 	
-		<script src="assets/js/yearSignReceive.js"></script>
-
 		<script>
 
 			// 请求的URL地址
 			var URL_LIST = {
 				yearSign_area_list: '_temp/reportsForMonth_month_list.html' //项目下来列表
-
-				,gotoPageUrl : "reportsForMonth_area.html" // 点击跳转至项目列表
 			}
 
-			var TABLE_COLUMNS =[{
-			        field: 'month',
-			        title: '月份',
-			        halign: 'center'
-			    }, {
-			        field: 'subscrib',
-			        title: '认购<br/>(万元)',
-			        halign: 'center'
-			    }, {
-			        field: 'sign',
-			        title: '签约<br/>(万元)',
-			        halign: 'center'
-			    }, {
-			        field: 'receive',
-			        title: '到款<br/>(万元)',
-			        halign: 'center'
-			    }];
 
 			$(function() {
-				//设置项目下来列表
-				loadTableList(URL_LIST.yearSign_area_list);
 								
 				//navigator bar 导航
 				initNavigatorBar();
 			});
+
+			$(function () {
+			    $('#canvas').highcharts({
+			        chart: {
+			            type: 'line'
+			        },
+			        title: {
+			            text: '销售趋势分析'
+			        },
+			        // subtitle: {
+			        //     text: 'Source: WorldClimate.com'
+			        // },
+			        xAxis: {
+			            categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+			        },
+			        yAxis: {
+			            title: {
+			                text: '金额(万元)'
+			            }
+			        },
+			        plotOptions: {
+			            line: {
+			                dataLabels: {
+			                    // enabled: true
+			                },
+			                enableMouseTracking: true
+			            }
+			        },
+			        series: [{
+			            name: '认购',
+			            data: [7000, 6900, 9500, 14500, 18400, 21500, 25200, 26500, 23300, 18300, 13900, 9600]
+			        },{
+			            name: '签约',
+			            data: [9000, 4900, 6500, 10500, 12400, 20000, 15200, 20500, 28300, 19300, 10900, 12600]
+			        },{
+			            name: '到款',
+			            data: [5000, 3900, 3500, 8500, 10400, 12500, 20200, 16500, 13300, 8300, 10900, 3600]
+			        }]
+			    });
+			});
+
 
 		</script>
 		
