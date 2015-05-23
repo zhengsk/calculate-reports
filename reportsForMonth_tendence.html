@@ -9,7 +9,6 @@
 		<title>销售趋势——经营分析 月报表</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-
 		<link rel="stylesheet" href="assets/css/common.css">
 
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
@@ -30,7 +29,7 @@
 			</div>
 
 			<div class="table-wrapper">
-				<div id="canvas">
+				<div id="canvas" style="width:100%; height:100%;">
 					
 				</div>
 			</div>
@@ -55,34 +54,45 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				yearSign_area_list: '_temp/reportsForMonth_month_list.html' //项目下来列表
+				charts: '_temp/reportsForMonth_tendence_list.html'
 			}
 
 
 			$(function() {
-								
+				
+				// 加载并渲染Chart
+				doAjax({
+					url: URL_LIST.charts
+					,data: {
+						UserID : ''
+					}
+				}, function(data) {
+					renderChart(data.lists);
+				});
+
 				//navigator bar 导航
 				initNavigatorBar();
 			});
 
-			$(function () {
-			    $('#canvas').highcharts({
+			// 渲染chart
+			function renderChart (datas) {
+				$('#canvas').highcharts({
 			        chart: {
-			            type: 'line'
+			            type: 'spline',
+			            spacing: [20,5,0,5]
 			        },
-			        title: {
-			            text: '销售趋势分析'
-			        },
-			        // subtitle: {
-			        //     text: 'Source: WorldClimate.com'
-			        // },
+			        title: {text: '2015年月销售分析', margin: 0, y: 5},
+			        credits: {enabled: false },
 			        xAxis: {
 			            categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
 			        },
 			        yAxis: {
-			            title: {
-			                text: '金额(万元)'
-			            }
+			        	title: {text: ''},
+			        	lineWidth: 1,
+			        	labels: {
+			        		x: -5,
+			        		format: "¥{value}"
+			        	}
 			        },
 			        plotOptions: {
 			            line: {
@@ -92,19 +102,9 @@
 			                enableMouseTracking: true
 			            }
 			        },
-			        series: [{
-			            name: '认购',
-			            data: [7000, 6900, 9500, 14500, 18400, 21500, 25200, 26500, 23300, 18300, 13900, 9600]
-			        },{
-			            name: '签约',
-			            data: [9000, 4900, 6500, 10500, 12400, 20000, 15200, 20500, 28300, 19300, 10900, 12600]
-			        },{
-			            name: '到款',
-			            data: [5000, 3900, 3500, 8500, 10400, 12500, 20200, 16500, 13300, 8300, 10900, 3600]
-			        }]
+			        series: datas
 			    });
-			});
-
+			}
 
 		</script>
 		
