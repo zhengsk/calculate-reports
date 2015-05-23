@@ -66,6 +66,17 @@
 				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetAreaMonthReport'
 
 				,gotoPageUrl : "reportsForMonth_project.html" // 点击跳转至项目列表
+
+				,gotoPageParam : [
+					{
+						source : "row",
+						name : "AreaId",
+						value : "areaName"
+					},{
+						name : "RptMonth",
+						value : "201505"
+					},
+				]
 			}
 
 			var TABLE_COLUMNS =[{

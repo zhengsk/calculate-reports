@@ -62,8 +62,8 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				yearSign_area_list: '_temp/reportsForMonth_project_list.html'
-				// yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/'
+				// yearSign_area_list: '_temp/reportsForMonth_project_list.html'
+				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/'
 
 				,gotoPageUrl : "reportsForMonth_saleType.html" // 点击跳转至项目列表
 			}
@@ -91,7 +91,7 @@
 
 			$(function() {
 				//设置项目下来列表
-				loadTableList(URL_LIST.yearSign_area_list, {RptMonth : "201501", areaName : "厦门"});
+				loadTableList(URL_LIST.yearSign_area_list, {RptMonth : queryParamsToObj().RptMonth, AreaId : queryParamsToObj().AreaId});
 								
 				//navigator bar 导航
 				initNavigatorBar();
