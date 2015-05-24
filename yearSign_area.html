@@ -33,9 +33,9 @@
 			</div>
 
 			<div class="table-wrapper">
-				<div id="buildingName" class="btn btn-primary btn-block active page-header">年度签约情况</div>
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header">年度签约情况  &nbsp; <span id="rptDateText">2015-05-24</span> <span class="caret"></span></label>
 
-				<!-- <input type="date" class="form-control date-input" name="projectList" id="projectList"> -->
+				<input type="date" class="form-control date-input" name="rptDate" id="rptDate">
 
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead></thead>
@@ -70,11 +70,14 @@
 
 				,gotoPageUrl : "yearSign_project.html" // 点击跳转至项目列表
 
-				,gotoPageParam : {
+				,gotoPageParam : [{
 					source : 'row',
 					name : 'AreaId',
 					value : 'areaId'
-				}
+				},{
+					name : 'RptDate',
+					value : $('#rptDate').val()
+				}]
 			}
 
 			var TABLE_COLUMNS =[{
@@ -104,6 +107,11 @@
 
 				//navigator bar 导航
 				initNavigatorBar();
+
+				$('#rptDate').on('change', function(){
+					$('#rptDateText').text(this.value);
+					reloadTableList(URL_LIST.yearSign_area_list, {RptDate : this.value});
+				});
 			});
 
 		</script>

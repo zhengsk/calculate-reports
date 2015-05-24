@@ -156,10 +156,17 @@
 	box-sizing: border-box;
 }
 
-.date-input{
+.hide-date-input{
 	-webkit-appearance: button;
 	text-align: center;
 	font-size: 20px;
 	line-height: 20px!important;
 	margin-bottom: 5px;
+
+	position: absolute; 
+	top:-999em; left:-999em;
+}
+
+.page-header .caret{
+	border-width: 6px;
 }

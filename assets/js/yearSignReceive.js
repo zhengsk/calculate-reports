@@ -53,6 +53,12 @@ function loadTableList(url, datas, offsetHeight) {
 	});
 }
 
+function reloadTableList(url, datas, offsetHeight){
+	$('#unitsListTable').bootstrapTable('destroy');
+	debugger;
+	loadTableList(url, datas, offsetHeight);
+}
+
 // setColumns
 function setColumns(columns, options) {
 	for (var i = 0, j = columns.length; i < j; i++) {
