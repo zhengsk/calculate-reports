@@ -1,4 +1,8 @@
 
+var CONSTANT = {
+	TODAY : (new Date()).Format("yyyy-MM-dd")
+}
+
 // 列默认值
 var DEFAULT_VALUE = {
 	align: "center",
@@ -12,8 +16,8 @@ var footerData = undefined;
 function loadTableList(url, datas, offsetHeight) {
 	
 	datas = $.extend({
-		UserID: '',
-		RptDate: '2015-5-10'
+		UserID: ''
+		// ,RptDate: '2015-5-10'
 	}, datas);
 
 	doAjax({
@@ -24,7 +28,7 @@ function loadTableList(url, datas, offsetHeight) {
 		footerData = data.pop();
 
 		// 渲染
-		$('#unitsListTable').bootstrapTable({
+		$('#unitsListTable').bootstrapTable('destroy').bootstrapTable({
 			height: getHeight(offsetHeight),
 			columns: setColumns(TABLE_COLUMNS, DEFAULT_VALUE),
 			data: data,
@@ -53,9 +57,9 @@ function loadTableList(url, datas, offsetHeight) {
 	});
 }
 
+// 重新加载表格数据
 function reloadTableList(url, datas, offsetHeight){
-	$('#unitsListTable').bootstrapTable('destroy');
-	debugger;
+	
 	loadTableList(url, datas, offsetHeight);
 }
 

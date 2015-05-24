@@ -8,6 +8,37 @@
 	user-select: none;
 }
 
+.loadingTipWrapper{
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.loadingTip{
+	position: absolute;
+	color: #FFF;
+	border-radius: 5px;
+	margin: auto;
+	min-width: 80px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.8);
+	top: 0; left: 0; bottom: 0; right: 0;
+	display: table;
+	height: auto;
+	padding: 20px;
+	width:50%;
+}
+
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
 
 .nav-tabs.nav-justified {
     width: 100%;

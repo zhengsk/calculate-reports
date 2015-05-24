@@ -33,7 +33,11 @@
 			</div>
 
 			<div class="table-wrapper">
-				<div id="buildingName" class="btn btn-primary btn-block active page-header">3月份报表</div>
+
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span>月份报表&nbsp;<span class="caret"></span></label>
+
+				<input type="month" class="form-control hide-date-input" name="rptDate" id="rptDate">
+
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead style="font-size:0.8em;"></thead>
 					<tbody></tbody>
@@ -74,7 +78,7 @@
 						value : "areaName"
 					},{
 						name : "RptMonth",
-						value : "201505"
+						value : queryParamsToObj().RptMonth
 					},
 				]
 			}
@@ -101,9 +105,15 @@
 			    }];
 
 			$(function() {
-				//设置项目下来列表
-				//loadTableList(URL_LIST.yearSign_area_list, {RptMonth : queryParamsToObj().month});
-				loadTableList(URL_LIST.yearSign_area_list, {RptMonth : "201501"});
+				
+				var year = (new Date()).getFullYear();
+				var month = queryParamsToObj().RptMonth;
+				if(month.length < 2){month = '0' + month}
+				
+				$('#rptDate').val(year + '-' + month).on('change', function(){
+					$('#rptDateText').text(this.value);
+					loadTableList(URL_LIST.yearSign_area_list, {RptMonth : year+month});
+				}).change();
 				
 				//navigator bar 导航
 				initNavigatorBar();

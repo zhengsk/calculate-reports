@@ -33,9 +33,9 @@
 			</div>
 
 			<div class="table-wrapper">
-				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header">年度签约情况  &nbsp; <span id="rptDateText">2015-05-24</span> <span class="caret"></span></label>
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header">年度签约情况  &nbsp; <span id="rptDateText"></span> <span class="caret"></span></label>
 
-				<input type="date" class="form-control date-input" name="rptDate" id="rptDate">
+				<input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate">
 
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead></thead>
@@ -65,8 +65,9 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				//yearSign_area_list: '_temp/yearSign_area_list.html' //项目下来列表
-				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetYearSignAll' //项目下来列表
+				// yearSign_area_list: '_temp/yearSign_area_list.html'
+				// yearSign_area_list: '_temp/error_01.html' 
+				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetYearSignAll'
 
 				,gotoPageUrl : "yearSign_project.html" // 点击跳转至项目列表
 
@@ -76,9 +77,10 @@
 					value : 'areaId'
 				},{
 					name : 'RptDate',
-					value : $('#rptDate').val()
+					value : CONSTANT.TODAY
 				}]
-			}
+			};
+
 
 			var TABLE_COLUMNS =[{
 			        field: 'areaName',
@@ -102,16 +104,14 @@
 			    }];
 
 			$(function() {
-				//设置项目下来列表
-				loadTableList(URL_LIST.yearSign_area_list);
 
 				//navigator bar 导航
 				initNavigatorBar();
 
-				$('#rptDate').on('change', function(){
+				$('#rptDate').val(CONSTANT.TODAY).on('change', function(){
 					$('#rptDateText').text(this.value);
-					reloadTableList(URL_LIST.yearSign_area_list, {RptDate : this.value});
-				});
+					loadTableList(URL_LIST.yearSign_area_list, {RptDate : this.value});
+				}).change();
 			});
 
 		</script>
