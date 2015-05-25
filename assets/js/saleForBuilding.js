@@ -112,12 +112,18 @@ function getColumnsAndRows(houseType) {
 			title: houseType[i].name + "<br/>" + houseType[i].area + "㎡"
 		}));
 		$.each(houseType[i].units, function(j, ele) {
-			if (!rows[j]) {
-				rows[j] = {}
+			if (!rows[ele.floorNum]) {
+				rows[ele.floorNum] = {}
 			}
-			rows[j]["unitName_" + i] = [ele.unitName, ele.saleStatus];
+			rows[ele.floorNum]["unitName_" + i] = [ele.unitName, ele.saleStatus];
 		});
 	};
+	for(var i = 0; i < rows.length; i++){ // delete undefind row
+		if(rows[i] === undefined){
+			rows.splice(i,1);
+			i--;
+		}
+	}
 	return {
 		columns: columns,
 		rows: rows
