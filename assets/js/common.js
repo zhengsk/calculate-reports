@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
  * 通用的Ajax调用方法
  */
 function doAjax (options, callBack) {
@@ -165,3 +166,9 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
+
+var CONSTANT = {
+    TODAY : (new Date()).Format("yyyy-MM-dd")
+    ,YESTODAY : (new Date((new Date()).getTime()-24*60*60*1000)).Format("yyyy-MM-dd")
+    ,TOMORROW : (new Date((new Date()).getTime()+24*60*60*1000)).Format("yyyy-MM-dd")
+}

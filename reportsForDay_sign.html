@@ -99,7 +99,7 @@
 
 			$(function() {
 				
-				$('#rptDate').val(CONSTANT.TODAY).on('change', function(){
+				$('#rptDate').val(CONSTANT.YESTODAY).on('change', function(){
 					$('#rptDateText').text(this.value);
 					loadTableList(URL_LIST.yearSign_area_list, {RptDate : this.value});
 				}).change();

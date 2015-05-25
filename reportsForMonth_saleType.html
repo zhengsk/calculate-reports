@@ -99,9 +99,16 @@
 
 			$(function() {
 
-				$('#rptDate').val(year + '-' + month).on('change', function(){
+				var monthText = queryParamsToObj().RptMonth;
+				var month = monthText.replace('-','');
+
+				$('#rptDate').val(monthText).on('change', function(){
 					$('#rptDateText').text(this.value);
-					loadTableList(URL_LIST.yearSign_area_list, {RptMonth : queryParamsToObj().RptMonth, ProjectName : queryParamsToObj().ProjectName});
+
+					loadTableList(URL_LIST.yearSign_area_list, {
+						RptMonth : this.value.replace('-',''), 
+						ProjectName : queryParamsToObj().ProjectName
+					});
 				}).change();
 												
 				//navigator bar 导航

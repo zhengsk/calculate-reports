@@ -1,8 +1,4 @@
 
-var CONSTANT = {
-	TODAY : (new Date()).Format("yyyy-MM-dd")
-}
-
 // 列默认值
 var DEFAULT_VALUE = {
 	align: "center",
@@ -10,7 +6,7 @@ var DEFAULT_VALUE = {
 	cellStyle: unitClassFormatter
 }
 
-var footerData = undefined;
+var FOOTERDATA = undefined;
 
 // 加载表格数据
 function loadTableList(url, datas, offsetHeight) {
@@ -25,7 +21,7 @@ function loadTableList(url, datas, offsetHeight) {
 		,data: datas
 	}, function(data) {
 
-		footerData = data.pop();
+		FOOTERDATA = data.pop();
 
 		// 渲染
 		$('#unitsListTable').bootstrapTable('destroy').bootstrapTable({
@@ -72,7 +68,7 @@ function setColumns(columns, options) {
 }
 
 function footerFormatter(data, column){
-	return footerData[column.field]
+	return FOOTERDATA[column.field]
 };
 
 // 格式化单元格内容文本

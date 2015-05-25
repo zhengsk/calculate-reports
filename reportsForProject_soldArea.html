@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>已售面积——经营分析 项目统计表</title>
+		<title>已售面积—经营分析 项目统计表</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
@@ -62,38 +62,41 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				purchaseSign: '_temp/reportsForProject_soldArea_list.html' //项目下来列表
+				// tableList: '_temp/reportsForProject_soldArea_list.html'
+				tableList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetRoomSaleAndRemainArea'
 			}
 
-			var TABLE_COLUMNS =[{
-			        field: 'projectName',
-			        title: '<br/>销售项目',
-			        halign: 'center'
+			var TABLE_COLUMNS =[
+				{
+			        field  : 'projectName',
+			        title  : '<br/>销售项目',
+			        halign : 'center'
 			    }, {
-			        field: 'saleTypeName',
-			        title: '<br/>业态',
-			        halign: 'center',
-			        align: 'center'
+			        field  : 'saleTypeName',
+			        title  : '<br/>业态',
+			        halign : 'center',
+			        align  : 'center'
 			    }, {
-			        field: 'totalArea',
-			        title: '总<br/>面积㎡',
-			        halign: 'center',
-			        align: 'right'
+			        field  : 'totalArea',
+			        title  : '总<br/>面积㎡',
+			        halign : 'center',
+			        align  : 'right'
 			    }, {
-			        field: 'soldArea',
-			        title: '已售<br/>面积㎡',
-			        halign: 'center',
-			        align: 'right'
+			        field  : 'soldArea',
+			        title  : '已售<br/>面积㎡',
+			        halign : 'center',
+			        align  : 'right'
 			    }, {
-			        field: 'remainArea',
-			        title: '未售<br/>面积㎡',
-			        halign: 'center',
-			        align: 'right'
-			    }];
+			        field  : 'remainArea',
+			        title  : '未售<br/>面积㎡',
+			        halign : 'center',
+			        align  : 'right'
+			    }
+			];
 
 			$(function() {
 				//加载表格数据
-				loadTableList(URL_LIST.purchaseSign, {}, -105);
+				loadTableList(URL_LIST.tableList, {}, -105);
 				
 				//navigator bar 导航
 				initNavigatorBar();

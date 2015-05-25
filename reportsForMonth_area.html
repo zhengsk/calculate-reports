@@ -64,26 +64,13 @@
 
 		<script>
 
-			// 请求的URL地址
-			var URL_LIST = {
-				// yearSign_area_list: '_temp/reportsForMonth_area_list.html'
-				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetAreaMonthReport'
+			var queryParamsObj = queryParamsToObj();
+			var year = queryParamsObj.RptYear;
+			var month = queryParamsObj.RptMonth;
+			if(month.length < 2){month = '0' + month}
 
-				,gotoPageUrl : "reportsForMonth_project.html" // 点击跳转至项目列表
-
-				,gotoPageParam : [
-					{
-						source : "row",
-						name : "AreaId",
-						value : "areaName"
-					},{
-						name : "RptMonth",
-						value : queryParamsToObj().RptMonth
-					},
-				]
-			}
-
-			var TABLE_COLUMNS =[{
+			var TABLE_COLUMNS =[
+				{
 			        field: 'areaName',
 			        title: '区域',
 			        halign: 'center'
@@ -102,17 +89,37 @@
 			        title: '到款<br/>(万元)',
 			        halign: 'center',
 			        align: 'right'
-			    }];
+			    }
+			];
+
+			// 请求的URL地址
+			var URL_LIST = {
+				// yearSign_area_list: '_temp/reportsForMonth_area_list.html'
+				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetAreaMonthReport'
+
+				,gotoPageUrl : "reportsForMonth_project.html" // 点击跳转至项目列表
+
+				,gotoPageParam : [
+					{
+						source : "row",
+						name : "AreaId",
+						value : "areaName"
+					},{
+						name : "RptYear",
+						value : year
+					},{
+						name : "RptMonth",
+						value : month
+					}
+				]
+			}
 
 			$(function() {
 				
-				var year = (new Date()).getFullYear();
-				var month = queryParamsToObj().RptMonth;
-				if(month.length < 2){month = '0' + month}
-				
 				$('#rptDate').val(year + '-' + month).on('change', function(){
 					$('#rptDateText').text(this.value);
-					loadTableList(URL_LIST.yearSign_area_list, {RptMonth : year+month});
+
+					loadTableList(URL_LIST.yearSign_area_list, {RptMonth : (this.value).replace('-','')});
 				}).change();
 				
 				//navigator bar 导航

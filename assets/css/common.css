@@ -34,13 +34,6 @@
 }
 
 
-.Absolute-Center {
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-}
-
-
 .nav-tabs.nav-justified {
     width: 100%;
     border-bottom: 0
