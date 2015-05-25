@@ -168,7 +168,9 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 
 var CONSTANT = {
-    TODAY : (new Date()).Format("yyyy-MM-dd")
+    IP_PATH : "http://120.42.54.162:80"
+    ,TODAY : (new Date()).Format("yyyy-MM-dd")
+    ,YEAR : (new Date()).Format("yyyy")
     ,YESTODAY : (new Date((new Date()).getTime()-24*60*60*1000)).Format("yyyy-MM-dd")
     ,TOMORROW : (new Date((new Date()).getTime()+24*60*60*1000)).Format("yyyy-MM-dd")
 }

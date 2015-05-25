@@ -75,13 +75,13 @@
 			// 请求的URL地址
 			var URL_LIST = {
 				// projectList: '_temp/saleForBuilding_project_list.html' //项目下来列表
-				projectList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetAllSellProject' //项目下来列表
+				projectList: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetAllSellProject' //项目下来列表
 
 				//,buildingList: '_temp/saleForBuilding_building_list.html' //楼栋下来列表
-				,buildingList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetBuilding' //楼栋下来列表
+				,buildingList: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetBuilding' //楼栋下来列表
 
 				//,unitsList: '_temp/saleForBuilding_units_list.html' //户型数据
-				,unitsList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetBuildingSaleInfo' //户型数据
+				,unitsList: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetBuildingSaleInfo' //户型数据
 			}
 
 			$(function() {

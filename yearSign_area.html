@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="table-wrapper">
-				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header">年度签约情况  &nbsp; <span id="rptDateText"></span> <span class="caret"></span></label>
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span>年度签约情况&nbsp;<span class="caret"></span></label>
 
 				<input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate">
 
@@ -67,7 +67,7 @@
 			var URL_LIST = {
 				// yearSign_area_list: '_temp/yearSign_area_list.html'
 				// yearSign_area_list: '_temp/error_01.html' 
-				yearSign_area_list: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetYearSignAll'
+				yearSign_area_list: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetYearSignAll'
 
 				,gotoPageUrl : "yearSign_project.html" // 点击跳转至项目列表
 

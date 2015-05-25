@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>认购签约——经营分析 项目统计表</title>
+		<title>认购签约—经营分析 项目统计表</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
@@ -63,34 +63,36 @@
 			// 请求的URL地址
 			var URL_LIST = {
 				//tableList: '_temp/reportsForProject_purchaseSign_list.html'
-				tableList: 'http://27.154.54.186:9000/VipService.asmx/WXSR_GetProjectPurchaseSignAllReport'
+				tableList: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetProjectPurchaseSignAllReport'
 			}
 
-			var TABLE_COLUMNS =[{
-			        field: 'projectName',
-			        title: '<br/>销售项目',
-			        halign: 'center'
+			var TABLE_COLUMNS =[
+				{
+			        field  : 'projectName',
+			        title  : '<br/>销售项目',
+			        halign : 'center'
 			    }, {
-			        field: 'purchaseTotal',
-			        title: '<br/>已认购',
-			        halign: 'center',
-			        align: 'right'
+			        field  : 'purchaseTotal',
+			        title  : '<br/>已认购',
+			        halign : 'center',
+			        align  : 'right'
 			    }, {
-			        field: 'signTotal',
-			        title: '<br/>已签约',
-			        halign: 'center',
-			        align: 'right'
+			        field  : 'signTotal',
+			        title  : '<br/>已签约',
+			        halign : 'center',
+			        align  : 'right'
 			    }, {
-			        field: 'receiveTotal',
-			        title: '<br/>已到款',
-			        halign: 'center',
-			        align: 'right'
+			        field  : 'receiveTotal',
+			        title  : '<br/>已到款',
+			        halign : 'center',
+			        align  : 'right'
 			    }, {
-			        field: 'unreceiveTotal',
-			        title: '<br/>未到款',
-			        halign: 'center',
-			        align: 'right'
-			    }];
+			        field  : 'unreceiveTotal',
+			        title  : '<br/>未到款',
+			        halign : 'center',
+			        align  : 'right'
+			    }
+			];
 
 			$(function() {
 				//加载表格数据
