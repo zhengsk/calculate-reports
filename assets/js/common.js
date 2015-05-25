@@ -57,6 +57,15 @@ function setSelect(selectId, datas, defaultId, changeFun){
     }
 }
 
+// 设置年份选择下拉
+function initYearSelect (selectId, minYear, maxYear) {
+    var datas = [];
+    for(var i = minYear, j = maxYear; i <= j; i++){
+        datas.push({id : i, name : i + '年'});
+    }
+    setSelect(selectId, datas)
+}
+
 // 加载提示
 LoadingTip = {
     show : function (content, autoHide) {

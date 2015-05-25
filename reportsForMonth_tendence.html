@@ -29,7 +29,12 @@
 			</div>
 
 			<div class="table-wrapper">
-				<div id="canvas" style="width:100%; height:100%;">
+
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span>年&nbsp;<span class="caret"></span></label>
+
+				<select class="hide-date-input" name="rptDate" id="rptDate"></select>
+
+				<div id="canvas" style="width:100%; height:100%; margin-top:-44px;">
 					
 				</div>
 			</div>
@@ -55,33 +60,46 @@
 			// 请求的URL地址
 			var URL_LIST = {
 				charts: '_temp/reportsForMonth_tendence_list.html'
+				// charts: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetMonthPurSignRecReport'
+
 			}
 
 
 			$(function() {
+
+				var minYear = 2012;
+				var maxYear = (new Date()).getFullYear();
+				initYearSelect('rptDate', minYear, maxYear); // 设置年份选择下拉
 				
-				// 加载并渲染Chart
-				doAjax({
-					url: URL_LIST.charts
-					,data: {
-						UserID : ''
-					}
-				}, function(data) {
-					renderChart(data.lists);
-				});
+				$('#rptDate').val(maxYear).on('change', function(){
+
+					// 加载并渲染Chart
+					doAjax({
+						url: URL_LIST.charts
+						,data: {
+							UserID : ''
+							,RptYear : this.value
+						}
+					}, function(data) {
+						renderChart(data.year, data.lists);
+					});
+
+					$('#rptDateText').text(this.value);
+
+				}).change();
 
 				//navigator bar 导航
 				initNavigatorBar();
 			});
 
 			// 渲染chart
-			function renderChart (datas) {
+			function renderChart (year, datas) {
 				$('#canvas').highcharts({
 			        chart: {
 			            type: 'spline',
-			            spacing: [20,5,0,5]
+			            spacing: [64,5,0,5]
 			        },
-			        title: {text: '2015年月销售分析', margin: 0, y: 5},
+			        title: {text: year + '年月销售分析', margin: 0, y: 5},
 			        credits: {enabled: false },
 			        xAxis: {
 			            categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']

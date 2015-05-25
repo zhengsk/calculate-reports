@@ -108,7 +108,7 @@
 
 				var minYear = 2012;
 				var maxYear = (new Date()).getFullYear();
-				initYearSelect(minYear, maxYear); // 设置年份选择下拉
+				initYearSelect('rptDate', minYear, maxYear); // 设置年份选择下拉
 
 				$('#rptDate').val(maxYear).on('change', function(){
 					$('#rptDateText').text(this.value);
@@ -121,14 +121,7 @@
 				initNavigatorBar();
 			});
 
-			// 设置年份选择下拉
-			function initYearSelect (minYear, maxYear) {
-				var datas = [];
-				for(var i = minYear, j = maxYear; i <= j; i++){
-					datas.push({id : i, name : i + '年'});
-				}
-				setSelect('rptDate', datas)
-			}
+			
 
 		</script>
 		
