@@ -177,6 +177,39 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
+//+--------------------------------------------------- 
+//| 日期计算 
+//+--------------------------------------------------- 
+Date.prototype.DateAdd = function(strInterval, Number) {
+    var dtTmp = this;
+    switch (strInterval) {
+        case 's':
+            return new Date(Date.parse(dtTmp) + (1000 * Number));
+            break;
+        case 'n':
+            return new Date(Date.parse(dtTmp) + (60000 * Number));
+            break;
+        case 'h':
+            return new Date(Date.parse(dtTmp) + (3600000 * Number));
+            break;
+        case 'd':
+            return new Date(Date.parse(dtTmp) + (86400000 * Number));
+            break;
+        case 'w':
+            return new Date(Date.parse(dtTmp) + ((86400000 * 7) * Number));
+            break;
+        case 'q':
+            return new Date(dtTmp.getFullYear(), (dtTmp.getMonth()) + Number * 3, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
+            break;
+        case 'm':
+            return new Date(dtTmp.getFullYear(), (dtTmp.getMonth()) + Number, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
+            break;
+        case 'y':
+            return new Date((dtTmp.getFullYear() + Number), dtTmp.getMonth(), dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
+            break;
+    }
+}
+
 
 var CONSTANT = {
     IP_PATH : "http://120.42.54.162:80"

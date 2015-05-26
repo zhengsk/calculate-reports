@@ -126,3 +126,32 @@ function combindTableRow(){
 	
 
 }
+
+// 时间快捷切换 上一个， 下一个 日期、月份、年份
+function dateSwitchBar(strInterval, minDate, maxDate){
+	var rptDateInput = $('#rptDate');
+
+	var rptDatePrevBtn = $('#rptDatePrev');
+	if(rptDatePrevBtn.length){
+		touchEndFun(rptDatePrevBtn, function(){
+			var currentDate = new Date(rptDateInput.val());
+			var newDate = currentDate.DateAdd(strInterval,-1);
+			rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+		});
+	}
+	
+	var rptDateNextBtn = $('#rptDateNext');
+	if(rptDateNextBtn.length){	
+		touchEndFun(rptDateNextBtn, function(){
+			var currentDate = new Date(rptDateInput.val());
+			var newDate = currentDate.DateAdd(strInterval,1);
+			rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+		});
+	}
+}
+
+
+
+
+
+
