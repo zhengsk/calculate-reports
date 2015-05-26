@@ -45,6 +45,8 @@ function loadProjectList(url) {
 			$('#buildingList')[0].length = 1;
 			$('#buildingList').change();
 			value !== 'undefined' && loadBUildingList(URL_LIST.buildingList, value); // 加载楼栋列表
+			// 显示选择提示
+			$('#alertTip').html(value === "undefined" ? "请选择项目！" : "请选择楼栋！").fadeIn(200);
 		});
 	});
 }
@@ -65,7 +67,10 @@ function loadBUildingList(url, projectId) {
 		setSelect("buildingList", data, "", function(value) {
 			showToggleElement(false); // 没数据 隐藏元素
 			value !== 'undefined' && loadUnitsList(URL_LIST.unitsList, value); // 加载户型数据
+			// 显示选择提示
+			value === "undefined" && $('#alertTip').html("请选择楼栋！").fadeIn(200);
 		});
+		$('#alertTip').fadeIn(200);
 	});
 }
 
@@ -99,6 +104,7 @@ function loadUnitsList(url, buildingId) {
 		// 展示统计信息
 		setCustomFooter(FOOTER_DATA);
 
+		$('#alertTip').hide();
 	});
 }
 

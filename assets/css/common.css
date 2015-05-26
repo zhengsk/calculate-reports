@@ -33,6 +33,16 @@
 	width:50%;
 }
 
+.alert-tip{
+	position: absolute;
+	left: 0;
+	width: 98%;
+	margin: 0 1% 0;
+	z-index: 1;
+	font-weight: bolder;
+	letter-spacing: 5px;
+}
+
 
 .nav-tabs.nav-justified {
     width: 100%;

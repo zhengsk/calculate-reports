@@ -85,6 +85,7 @@ LoadingTip = {
         }else{
             this.ele.innerText = content ||"加载中...";
             this.wrapper.style.display = "block";
+            this.shown = true;
         }
         if(autoHide){
             setTimeout(function(){_this.hide()}, autoHide);
@@ -92,6 +93,7 @@ LoadingTip = {
     },
     hide : function () {
         $(this.wrapper).stop(true,true).fadeOut(400);
+        this.shown = false;
     }
 }
 
