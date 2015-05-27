@@ -134,19 +134,61 @@ function dateSwitchBar(strInterval, minDate, maxDate){
 	var rptDatePrevBtn = $('#rptDatePrev');
 	if(rptDatePrevBtn.length){
 		touchEndFun(rptDatePrevBtn, function(){
-			var currentDate = new Date(rptDateInput.val());
-			var newDate = currentDate.DateAdd(strInterval,-1);
-			rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+			var currentDate, newDate
+			if(strInterval === "y"){
+				currentDate = parseInt(rptDateInput.val(),10);
+				newDate = currentDate-1;
+				rptDateInput.val(newDate).change();
+			}else if(strInterval === "m"){
+				currentDate = new Date(rptDateInput.val());
+				newDate = currentDate.DateAdd(strInterval,-1);
+				rptDateInput.val(newDate.Format("yyyy-MM")).change();
+			}else{
+				currentDate = new Date(rptDateInput.val());
+				newDate = currentDate.DateAdd(strInterval,-1);
+				rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+			}
+			setNavAvaliable(newDate); // setNavAvaliable
 		});
 	}
 	
 	var rptDateNextBtn = $('#rptDateNext');
 	if(rptDateNextBtn.length){	
 		touchEndFun(rptDateNextBtn, function(){
-			var currentDate = new Date(rptDateInput.val());
-			var newDate = currentDate.DateAdd(strInterval,1);
-			rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+			var currentDate, newDate
+			if(strInterval === "y"){
+				currentDate = parseInt(rptDateInput.val(),10);
+				newDate = currentDate+1;
+				rptDateInput.val(newDate).change();
+			}else if(strInterval === "m"){
+				currentDate = new Date(rptDateInput.val());
+				newDate = currentDate.DateAdd(strInterval,1);
+				rptDateInput.val(newDate.Format("yyyy-MM")).change();
+			}else{
+				currentDate = new Date(rptDateInput.val());
+				newDate = currentDate.DateAdd(strInterval,1);
+				rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+			}
+			setNavAvaliable(newDate); // setNavAvaliable
 		});
+	}
+
+	// set set rptDate avaliable 
+	var setNavAvaliable = function (current) {
+		if(minDate){
+			if(current <= minDate){
+				rptDatePrevBtn.addClass('disabled');
+			}else{
+				rptDatePrevBtn.removeClass('disabled');
+			}
+		}
+		if(maxDate){
+			if(current >= maxDate){
+				rptDateNextBtn.addClass('disabled');
+			}else{
+				rptDateNextBtn.removeClass('disabled');
+			}
+		}
 	}
 }
 
