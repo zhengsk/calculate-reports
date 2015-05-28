@@ -160,6 +160,7 @@
 	position: relative;
 	z-index: 1;
 	margin:5px 0;
+	overflow: hidden;
 }
 
 .fixed-table-header{

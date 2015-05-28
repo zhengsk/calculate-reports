@@ -33,7 +33,10 @@
 			</div>
 
 			<div class="table-wrapper">
-				<div id="buildingName" class="btn btn-primary btn-block active page-header">年度签约情况</div>
+
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span> <span class="caret"></span></label>
+				<input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate">
+
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead></thead>
 					<tbody></tbody>
@@ -61,8 +64,8 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				//yearSign_area_list: '_temp/yearSign_project_list.html' //项目下来列表
-				yearSign_area_list: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetYearSignProject' //项目下来列表
+				//yearSign_area_list: '_temp/yearSign_project_list.html'
+				yearSign_area_list: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetYearSignProject'
 			}
 
 			var TABLE_COLUMNS =[{
@@ -87,8 +90,11 @@
 			    }];
 
 			$(function() {
-				//设置项目下来列表
-				loadTableList(URL_LIST.yearSign_area_list, {AreaId : queryParamsToObj().AreaId, RptDate : queryParamsToObj().RptDate});
+				var queryParamsObj = queryParamsToObj();
+				$('#rptDate').val(queryParamsObj.RptDate).on('change', function(){
+					$('#rptDateText').text(this.value + ' ' + queryParamsObj.AreaId);
+					loadTableList(URL_LIST.yearSign_area_list, {AreaId : queryParamsObj.AreaId, RptDate : queryParamsObj.RptDate});
+				}).change();
 
 				//navigator bar 导航
 				initNavigatorBar();

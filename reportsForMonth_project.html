@@ -34,7 +34,17 @@
 
 			<div class="table-wrapper">
 
-				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span>月份报表&nbsp;<span class="caret"></span></label>
+				<div class="btn-group btn-group-justified">
+					<div class="btn-group">
+						<button id="rptDatePrev" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i></button>
+					</div>
+					<div class="btn-group" style="width:2.5%">
+						<label for="rptDate" id="buildingName" class="btn btn-primary page-header"><span id="rptDateText"></span> <span class="caret"></span></label>
+					</div>
+					<div class="btn-group">
+						<button id="rptDateNext" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-right"></i></button>
+					</div>
+				</div>
 
 				<input type="month" class="form-control hide-date-input" name="rptDate" id="rptDate">
 
@@ -110,7 +120,7 @@
 				if(month.length < 2){month = '0' + month}
 
 				$('#rptDate').val(year + '-' + month).on('change', function(){
-					$('#rptDateText').text(this.value);
+					$('#rptDateText').text(this.value + ' ' + queryParamsToObj().AreaId);
 					loadTableList(URL_LIST.yearSign_area_list, {
 						RptMonth : (this.value).replace('-',''), 
 						AreaId : queryParamsToObj().AreaId
@@ -118,7 +128,10 @@
 
 					URL_LIST.gotoPageParam[1].value = this.value;
 				}).change();
-								
+				
+				//日期切换
+				dateSwitchBar('m', (new Date('2013-01')).getTime(), (new Date(CONSTANT.YEAR_MONTH)).getTime());
+			
 				//navigator bar 导航
 				initNavigatorBar();
 			});

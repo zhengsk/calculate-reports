@@ -132,49 +132,40 @@ function dateSwitchBar(strInterval, minDate, maxDate){
 	var rptDateInput = $('#rptDate');
 
 	var rptDatePrevBtn = $('#rptDatePrev');
-	if(rptDatePrevBtn.length){
+	if(rptDatePrevBtn.length){ // 上一日期
 		touchEndFun(rptDatePrevBtn, function(){
-			var currentDate, newDate
-			if(strInterval === "y"){
-				currentDate = parseInt(rptDateInput.val(),10);
-				newDate = currentDate-1;
-				rptDateInput.val(newDate).change();
-			}else if(strInterval === "m"){
-				currentDate = new Date(rptDateInput.val());
-				newDate = currentDate.DateAdd(strInterval,-1);
-				rptDateInput.val(newDate.Format("yyyy-MM")).change();
-			}else{
-				currentDate = new Date(rptDateInput.val());
-				newDate = currentDate.DateAdd(strInterval,-1);
-				rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
-			}
-			setNavAvaliable(newDate); // setNavAvaliable
+			touchToDo(-1);
 		});
 	}
 	
 	var rptDateNextBtn = $('#rptDateNext');
-	if(rptDateNextBtn.length){	
+	if(rptDateNextBtn.length){	// 下一日期
 		touchEndFun(rptDateNextBtn, function(){
-			var currentDate, newDate
-			if(strInterval === "y"){
-				currentDate = parseInt(rptDateInput.val(),10);
-				newDate = currentDate+1;
-				rptDateInput.val(newDate).change();
-			}else if(strInterval === "m"){
-				currentDate = new Date(rptDateInput.val());
-				newDate = currentDate.DateAdd(strInterval,1);
-				rptDateInput.val(newDate.Format("yyyy-MM")).change();
-			}else{
-				currentDate = new Date(rptDateInput.val());
-				newDate = currentDate.DateAdd(strInterval,1);
-				rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
-			}
-			setNavAvaliable(newDate); // setNavAvaliable
+			touchToDo(1);
 		});
 	}
 
+	// touch events
+	function touchToDo(step){
+		var currentDate, newDate
+		if(strInterval === "y"){
+			currentDate = parseInt(rptDateInput.val(),10);
+			newDate = currentDate + step;
+			rptDateInput.val(newDate).change();
+		}else if(strInterval === "m"){
+			currentDate = new Date(rptDateInput.val());
+			newDate = currentDate.DateAdd(strInterval, step);
+			rptDateInput.val(newDate.Format("yyyy-MM")).change();
+		}else{
+			currentDate = new Date(rptDateInput.val());
+			newDate = currentDate.DateAdd(strInterval, step);
+			rptDateInput.val(newDate.Format("yyyy-MM-dd")).change();
+		}
+		setNavAvaliable(newDate); // setNavAvaliable
+	}
+
 	// set set rptDate avaliable 
-	var setNavAvaliable = function (current) {
+	function setNavAvaliable(current) {
 		if(minDate){
 			if(current <= minDate){
 				rptDatePrevBtn.addClass('disabled');
@@ -190,6 +181,18 @@ function dateSwitchBar(strInterval, minDate, maxDate){
 			}
 		}
 	}
+
+	// auto run when init
+	if(true){
+		var currentDate;
+		if(strInterval === "y"){
+			currentDate = parseInt(rptDateInput.val(),10);
+		}else{
+			currentDate = (new Date(rptDateInput.val())).getTime();
+		}
+		setNavAvaliable(currentDate);
+	}
+	
 }
 
 

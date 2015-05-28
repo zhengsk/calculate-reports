@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="table-wrapper">
-				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span>年度签约情况&nbsp;<span class="caret"></span></label>
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span><span class="caret"></span></label>
 
 				<input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate">
 
@@ -77,7 +77,7 @@
 					value : 'areaId'
 				},{
 					name : 'RptDate',
-					value : CONSTANT.TODAY
+					value : null
 				}]
 			};
 
@@ -104,14 +104,14 @@
 			    }];
 
 			$(function() {
-
-				//navigator bar 导航
-				initNavigatorBar();
-
 				$('#rptDate').val(CONSTANT.TODAY).on('change', function(){
 					$('#rptDateText').text(this.value);
 					loadTableList(URL_LIST.yearSign_area_list, {RptDate : this.value});
+					URL_LIST.gotoPageParam[1].value = this.value;
 				}).change();
+
+				//navigator bar 导航
+				initNavigatorBar();
 			});
 
 		</script>
