@@ -34,7 +34,7 @@ function loadProjectList(url) {
 		url: url
 		// ,type: 'POST'
 		,data: {
-			UserID : ''
+			
 		}
 	}, function(data) {
 		data.unshift({

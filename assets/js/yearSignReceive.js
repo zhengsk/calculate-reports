@@ -11,10 +11,7 @@ var FOOTERDATA = undefined;
 // 加载表格数据
 function loadTableList(url, datas, offsetHeight) {
 	
-	datas = $.extend({
-		UserID: ''
-		// ,RptDate: '2015-5-10'
-	}, datas);
+	datas = $.extend({}, datas);
 
 	doAjax({
 		url: url

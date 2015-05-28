@@ -9,7 +9,10 @@ function doAjax (options, callBack) {
     var defaultOptions = {
         type : "GET"
         ,dataType : "json"
-        ,data: {access_token: 'OIUE-ECNE-CHEO-BIUL'}
+        ,data: {
+            access_token: 'OIUE-ECNE-CHEO-BIUL'
+            ,UserID: ''
+        }
     }
 
     callBack = callBack || options.callBack || jQuery.noop();
