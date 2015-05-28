@@ -13,12 +13,12 @@ var FOOTER_DATA = [
 	{
 		name : 'sale',
 		text : '认购',
-		className : 'info',
+		className : 'td-info',
 		num : 0
 	},{
 		name : 'sign',
 		text : '签约',
-		className : 'danger',
+		className : 'td-danger',
 		num : 0
 	},{
 		name : 'keep',
@@ -94,7 +94,7 @@ function loadUnitsList(url, buildingId) {
 			height: getHeight(),
 			headerHeight: 55,
 			columns: columnsAndRows.columns,
-			data: columnsAndRows.rows,
+			data: columnsAndRows.rows.reverse(),
 			showFooter: false,
 			showHeader: true
 		});

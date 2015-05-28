@@ -8,6 +8,10 @@
 	user-select: none;
 }
 
+.table-striped>tbody>tr:nth-child(odd){
+	background-color: #F0F0F0;
+}
+
 .loadingTipWrapper{
 	position: fixed;
 	z-index: 10000;
@@ -133,6 +137,14 @@
 	margin-top: -1px;
 	margin-bottom: 0;
 	text-align: center;
+}
+
+.td-info{
+	background-color: yellow;
+}
+
+.td-danger{
+	background-color: red;
 }
 
 /* =E saleForBuilding */
