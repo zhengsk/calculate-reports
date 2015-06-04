@@ -222,3 +222,18 @@ var CONSTANT = {
     ,YESTODAY   : (new Date((new Date()).getTime()-24*60*60*1000)).Format("yyyy-MM-dd")
     ,TOMORROW   : (new Date((new Date()).getTime()+24*60*60*1000)).Format("yyyy-MM-dd")
 }
+
+
+var RowStyleFun = (function () {
+    var i = 0, preProjectName;
+    var fun = function(row, index){
+        console.info(index)
+        if(row.projectName !== preProjectName){
+            i++;
+            preProjectName = row.projectName;
+            if(i === 2){i = 0}
+        }
+        return {classes : ['success', 'warning' ,'info'][i]}
+    }
+    return fun;
+})();
