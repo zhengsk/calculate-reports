@@ -207,7 +207,6 @@
 }
 
 .hide-date-input{
-	-webkit-appearance: button;
 	text-align: center;
 	font-size: 20px;
 	line-height: 20px!important;
@@ -215,6 +214,10 @@
 
 	position: absolute; 
 	top:-999em; left:-999em;
+
+	/*opacity: 0;
+	margin-top:-26px;
+	margin-bottom:-8px;*/
 }
 
 .page-header .caret{

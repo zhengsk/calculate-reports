@@ -8,6 +8,13 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link href="assets/css/index.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript">
+			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+				WeixinJSBridge.call('hideOptionMenu');
+			});
+		</script>
 	</head>
 	<body>
 		<ul class="mainmenu">

@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>年度签约情况 各事业部</title>
+		<title>年度签约情况</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
@@ -33,9 +33,9 @@
 			</div>
 
 			<div class="table-wrapper">
-				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span><span class="caret"></span></label>
+				<label for="rptDate" id="buildingName" class="btn btn-primary btn-block page-header"><span id="rptDateText"></span><span class="caret"></span><input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate"></label>
 
-				<input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate">
+				
 
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead></thead>
@@ -112,6 +112,10 @@
 
 				//navigator bar 导航
 				initNavigatorBar();
+
+				setTimeout(function(){
+					// $('#rptDate').focus();
+				},2000);
 			});
 
 		</script>
