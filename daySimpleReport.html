@@ -2,15 +2,27 @@
 <html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>认购签约 项目统计表</title>
+		<title>日销售简报</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
 
 		<link rel="stylesheet" href="assets/css/common.css">
+		<style type="text/css" media="screen">
+			.dayReportContent{
+				border: 1px solid #CCC;
+				padding: 8px;
+				text-indent: 2em;
+				line-height: 1.8em;
+				border-radius: 5px;
+				overflow: auto;
+				-webkit-overflow-scrolling : touch; 
+			}
+		</style>
 
 		<!-- <script src="assets/js/jquery.min.js"></script> -->
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
@@ -33,28 +45,40 @@
 
 			<div class="fixd-tab-nav">
 				<ul class="nav nav-tabs nav-justified">
-					<li class="active"><a href="reportsForProject_purchaseSign.html">认购签约</a></li>
-					<li><a href="reportsForProject_soldCount.html">已售套数</a></li>
-					<li><a href="reportsForProject_soldArea.html">已售面积</a></li>
+					<li role="presentation" class="active"><a href="daySimpleReport.html">日销售简报</a></li>
 				</ul>
 			</div>
 
-			<div class="table-wrapper" style="padding-top:50px; font-size: 0.8em;">
-				<table class="table-striped table-condensed unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
-					<thead></thead>
-					<tbody></tbody>
-				</table>
+			<div class="table-wrapper">
+
+				<div class="btn-group btn-group-justified">
+					<div class="btn-group">
+						<button id="rptDatePrev" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i></button>
+					</div>
+					<div class="btn-group" style="width:2.5%">
+						<label for="rptDate" id="buildingName" class="btn btn-primary page-header"><span id="rptDateText"></span> <span class="caret"></span></label>
+					</div>
+					<div class="btn-group">
+						<button id="rptDateNext" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-right"></i></button>
+					</div>
+				</div>
+
+				<input type="date" class="form-control hide-date-input" name="rptDate" id="rptDate">
+
+				<div id="dayReportContent" class="dayReportContent">
+					
+				</div>
 			</div>
 
 			<div class="bottom-back-btn">
 				<div class="btn-group btn-group-justified">
-				  <div class="btn-group" role="group">
+				  <div class="btn-group">
 				    <button id="historyBack" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> 后退</button>
 				  </div>
-				  <div class="btn-group" role="group">
+				  <div class="btn-group">
 				    <button id="goToHome" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-home"></i> 首页</button>
 				  </div>
-				  <div class="btn-group" role="group">
+				  <div class="btn-group">
 				    <button id="historyForward" type="button" class="btn btn-primary">前进 <i class="glyphicon glyphicon-chevron-right"></i></button>
 				  </div>
 				</div>
@@ -68,44 +92,33 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				//tableList: '_temp/reportsForProject_purchaseSign_list.html'
-				tableList: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetProjectPurchaseSignAllReport'
+				daySimpleReport: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetDaySimpleReport' 
 			}
 
-			var TABLE_COLUMNS =[
-				{
-			        field  : 'projectName',
-			        title  : '销售项目',
-			        halign : 'center'
-			    }, {
-			        field  : 'purchaseTotal',
-			        title  : '已认购<br/>(万元)',
-			        halign : 'center',
-			        align  : 'right'
-			    }, {
-			        field  : 'signTotal',
-			        title  : '已签约<br/>(万元)',
-			        halign : 'center',
-			        align  : 'right'
-			    }, {
-			        field  : 'receiveTotal',
-			        title  : '已到款<br/>(万元)',
-			        halign : 'center',
-			        align  : 'right'
-			    }, {
-			        field  : 'unreceiveTotal',
-			        title  : '未到款<br/>(万元)',
-			        halign : 'center',
-			        align  : 'right'
-			    }
-			];
-
 			$(function() {
-				//加载表格数据
-				loadTableList(URL_LIST.tableList, {}, -105);
+				$('#rptDate').val(CONSTANT.YESTODAY).on('change', function(){
+					$('#rptDateText').text(this.value);
+					
+					// 加载并渲染Chart
+					doAjax({
+						url: URL_LIST.daySimpleReport
+						,data: {
+							UserID : ''
+							,RptDate : this.value
+						}
+					}, function(data) {
+						$('#dayReportContent').html(data[0].content);
+					});
+
+				}).change();
+
+				//日期切换
+				dateSwitchBar('d', 0, (new Date(CONSTANT.TODAY)).getTime());
 				
 				//navigator bar 导航
 				initNavigatorBar();
+
+				$('#dayReportContent').height( $(window).height() - 160 );
 			});
 
 		</script>
