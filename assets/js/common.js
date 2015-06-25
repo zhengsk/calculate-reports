@@ -11,7 +11,7 @@ function doAjax (options, callBack) {
         ,dataType : "json"
         ,data: {
             access_token: 'OIUE-ECNE-CHEO-BIUL'
-            ,UserID: ''
+            ,UserID: getUserID()
         }
     }
 
@@ -40,6 +40,17 @@ function doAjax (options, callBack) {
 function gotoPage (url, params){
     var params = params ? ( "?" +  jQuery.param(params) ) : '';
     window.location.href = url + params;
+}
+
+// 获取用户ID  UserID
+function getUserID (){
+    var UserID = sessionStorage.removeItem("UserID");
+    if(UserID === null){
+        alert('对不起，您没有权限查看！');
+        gotoPage(index.html);
+    }else{
+        return UserID;
+    }
 }
 
 // 设置下拉列表

@@ -15,6 +15,21 @@
 				WeixinJSBridge.call('hideOptionMenu');
 			});
 		</script>
+
+		<script src="assets/js/common.js"></script>
+		<script>
+			;(function(){
+				var param = queryParamsToObj();
+				if(param.UserID !== undefined){
+					sessionStorage.setItem("UserID", param.UserID);
+				}else{
+					if(!sessionStorage.getItem("UserID")){
+						alert('对不起，您没有权限查看！')
+					};
+				}
+			}());
+		</script>
+
 	</head>
 	<body>
 		<ul class="mainmenu">
