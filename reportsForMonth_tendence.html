@@ -95,8 +95,7 @@
 					doAjax({
 						url: URL_LIST.charts
 						,data: {
-							UserID : ''
-							,RptYear : this.value
+							RptYear : this.value
 						}
 					}, function(data) {
 						renderChart(data.year, data.lists);

@@ -109,8 +109,7 @@
 					doAjax({
 						url: URL_LIST.daySimpleReport
 						,data: {
-							UserID : ''
-							,RptDate : this.value
+							RptDate : this.value
 						}
 					}, function(data) {
 						$('#dayReportContent').html(data[0].content);

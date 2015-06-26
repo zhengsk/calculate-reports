@@ -44,10 +44,9 @@ function gotoPage (url, params){
 
 // 获取用户ID  UserID
 function getUserID (){
-    var UserID = sessionStorage.removeItem("UserID");
+    var UserID = sessionStorage.getItem("UserID");
     if(UserID === null){
-        alert('对不起，您没有权限查看！');
-        gotoPage(index.html);
+        gotoPage("index.html");
     }else{
         return UserID;
     }
