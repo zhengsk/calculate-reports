@@ -213,11 +213,10 @@
 	margin-bottom: 5px;
 
 	position: absolute; 
-	top:-999em; left:-999em;
-
-	/*opacity: 0;
-	margin-top:-26px;
-	margin-bottom:-8px;*/
+	/*top:-999em; left:-999em;*/
+	
+	top: 0; left: 0;
+	opacity: 0;
 }
 
 .page-header .caret{
