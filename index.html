@@ -23,6 +23,7 @@
 				if(param.UserID !== undefined){
 					sessionStorage.setItem("UserID", param.UserID);
 				}else{
+					sessionStorage.setItem("UserID", 'liuzp'); // TO DO
 					if(!sessionStorage.getItem("UserID")){
 						alert('对不起，您没有权限查看！')
 					};
