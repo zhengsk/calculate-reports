@@ -26,8 +26,6 @@ function loadTableList(url, datas, offsetHeight) {
 			columns: setColumns(TABLE_COLUMNS, DEFAULT_VALUE),
 			data: data,
 			headerHeight: 55, // zsk extend
-			showFooter: true,
-			showHeader: true
 		}).on('click-row.bs.table', function (e, row, $element) {
 			if(URL_LIST.gotoPageUrl){
 				var params = {};

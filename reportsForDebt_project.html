@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+
+		<title>超期未到款</title>
+
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
+
+		<link rel="stylesheet" href="assets/css/common.css">
+
+		<!-- <script src="assets/js/jquery.min.js"></script> -->
+		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap-table/bootstrap-table.js"></script>
+		<script src="assets/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+		<script src="assets/js/common.js"></script>
+
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript">
+			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+				WeixinJSBridge.call('hideOptionMenu');
+			});
+		</script>
+		
+	</head>
+	<body>
+		<div class="container-fluid">
+
+			<div class="fixd-tab-nav">
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation" class="active"><a href="reportsForDebt_project.html">超期未到款</a></li>
+				</ul>
+			</div>
+
+			<div class="table-wrapper" style="padding-top:47px;">
+
+				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
+					<thead></thead>
+					<tbody></tbody>
+				</table>
+
+			</div>
+
+			<div class="bottom-back-btn">
+				<div class="btn-group btn-group-justified">
+				  <div class="btn-group">
+				    <button id="historyBack" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> 后退</button>
+				  </div>
+				  <div class="btn-group">
+				    <button id="goToHome" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-home"></i> 首页</button>
+				  </div>
+				  <div class="btn-group">
+				    <button id="historyForward" type="button" class="btn btn-primary">前进 <i class="glyphicon glyphicon-chevron-right"></i></button>
+				  </div>
+				</div>
+			</div>
+						
+		</div>
+	
+		<script src="assets/js/yearSignReceive.js"></script>
+
+		<script>
+
+			// 请求的URL地址
+			var URL_LIST = {
+				// dataUrl: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetDaySimpleReport' 
+				dataUrl: '_temp/reportsForDebt_project.html'
+
+				,gotoPageUrl : "reportsForDebt_building.html" // 点击跳转至项目列表
+
+				,gotoPageParam : [{
+					source : 'row',
+					name : 'projectId',
+					value : 'projectId'
+				}]
+			}
+
+			var TABLE_COLUMNS =[
+				{
+			        field: 'projectName',
+			        title: '项目',
+			        halign: 'center'
+			    }, {
+			        field: 'unitNum',
+			        title: '套数<br/>(套)',
+			        halign: 'center',
+			        align: 'right'
+			    }, {
+			        field: 'debtNum',
+			        title: '欠款金额<br/>(万元)',
+			        halign: 'center',
+			        align: 'right'
+			    }
+			];
+
+			$(function() {
+
+				loadTableList(URL_LIST.dataUrl, {}, -100);
+
+				//navigator bar 导航
+				initNavigatorBar();
+			});
+		</script>
+		
+	</body>
+</html>
