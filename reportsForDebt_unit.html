@@ -69,9 +69,8 @@
 
 			// 请求的URL地址
 			var URL_LIST = {
-				// dataUrl: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetDaySimpleReport' 
-				dataUrl: '_temp/reportsForDebt_unit.html'
-				
+				dataUrl: CONSTANT.IP_PATH + '/VipService.asmx/WXSR_GetRoomUnRec' 
+				//dataUrl: '_temp/reportsForDebt_unit.html'
 			}
 
 			var TABLE_COLUMNS =[
@@ -83,15 +82,45 @@
 			        field: 'fieldValue',
 			        title: '内容',
 			        halign: 'center',
-			        align: 'right'
+			        align: 'left'
 			    }
 			];
 
 			$(function() {
 
-				var unitId = queryParamsToObj().unitId;
+				var columnDatasName = {
+					roomNo : "房间号"
+					,cusName : "客户名称"
+					,purDate : "认购日期"
+					,sigDate : "签约日期"
+					,onRecDate : "备案日期"
+					,unRec : "欠款金额"
+					,saleMan : "销售顾问"
+					,payWay : "付款方式"
+					,loadBank : "按揭银行"
+					,process : "办理进度"
+					,loadRem : "按揭备注"
+					,loanLawyer : "银行经办人"
+					,noticeRec : "发函记录"
 
-				loadTableList(URL_LIST.dataUrl, {unitId : unitId}, -100);
+				}
+
+				var roomId = queryParamsToObj().unitId;
+
+				loadTableList(URL_LIST.dataUrl, {roomId : roomId}, -100, function(data){
+
+					var data = $.map(data[0], function(value, key){
+						return {
+						    "fieldName" : columnDatasName[key],
+						    "fieldValue" : value
+						}
+					});
+
+					data.push([]);
+
+					return data;
+
+				});
 
 				//navigator bar 导航
 				initNavigatorBar();

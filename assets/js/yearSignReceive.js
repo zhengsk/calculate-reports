@@ -9,7 +9,7 @@ var DEFAULT_VALUE = {
 var FOOTERDATA = undefined;
 
 // 加载表格数据
-function loadTableList(url, datas, offsetHeight) {
+function loadTableList(url, datas, offsetHeight, datasFun) {
 	
 	datas = $.extend({}, datas);
 
@@ -17,8 +17,11 @@ function loadTableList(url, datas, offsetHeight) {
 		url: url
 		,data: datas
 	}, function(data) {
+		// 处理返回的数据
+		if(datasFun){data = datasFun(data)};
 
 		FOOTERDATA = data.pop();
+		
 
 		// 渲染
 		$('#unitsListTable').bootstrapTable('destroy').bootstrapTable({
