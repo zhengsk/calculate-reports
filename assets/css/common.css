@@ -129,6 +129,11 @@
 	margin-bottom: -45px;
 }
 
+.table-wrapper .well{
+	margin-bottom: 4px;
+	padding: 10px;
+}
+
 .unitsListTable{
 	/*height: 300px;*/
 }

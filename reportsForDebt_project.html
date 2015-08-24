@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<title>超期未到款</title>
+		<title>逾期未到款</title>
 
 		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">
@@ -34,12 +34,12 @@
 
 			<div class="fixd-tab-nav">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation" class="active"><a href="reportsForDebt_project.html">超期未到款</a></li>
+					<li role="presentation" class="active"><a href="reportsForDebt_project.html">逾期未到款</a></li>
 				</ul>
 			</div>
 
 			<div class="table-wrapper" style="padding-top:47px;">
-
+				<div class="well">逾期未到款是指商业贷款合同签订后90天未到款,公积金贷款(含组合)120天后未到款</div>
 				<table class="table-striped unitsListTable" id="unitsListTable" data-cache="false" data-show-footer="true">
 					<thead></thead>
 					<tbody></tbody>
@@ -101,7 +101,7 @@
 
 			$(function() {
 
-				loadTableList(URL_LIST.dataUrl, {}, -100);
+				loadTableList(URL_LIST.dataUrl, {}, -167);
 
 				//navigator bar 导航
 				initNavigatorBar();
